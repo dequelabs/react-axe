@@ -13,9 +13,9 @@ Call the exported function passing in the React and ReactDOM objects as well as 
 ```
 var React = require('react');
 var ReactDOM = require('react-dom');
-var a11y = require('react-axe');
+var axe = require('react-axe');
 
-a11y(React, ReactDOM, 1000);
+axe(React, ReactDOM, 1000);
 ```
 
 Once initialized like this, the module will output accessibility defect information to the Chrome Devtools console every time a component updates.
