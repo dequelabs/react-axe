@@ -1,0 +1,20 @@
+{
+  "name": "react-axe",
+  "version": "1.0.0",
+  "description": "Dynamic accessibility analysis for React using axe-core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "lint",
+    "test"
+  ],
+  "author": "Dylan Barrell (dylan@barrell.com)",
+  "license": "MIT",
+  "dependencies": {
+    "axe-core": "^1.1.1"
+  }
+}
