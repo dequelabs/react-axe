@@ -13,12 +13,24 @@ Call the exported function passing in the React and ReactDOM objects as well as 
 ```
 var React = require('react');
 var ReactDOM = require('react-dom');
-var axe = require('react-axe');
 
-axe(React, ReactDOM, 1000);
+if (process.env.NODE_ENV !== 'production') {
+	var axe = require('react-axe');
+	axe(React, ReactDOM, 1000);
+}
 ```
 
-Once initialized like this, the module will output accessibility defect information to the Chrome Devtools console every time a component updates.
+Be sure to only run the module in your development environment (as shown in the code above) or else your application will use more resources than necessary when in production. You can use [envify](https://www.npmjs.com/package/envify) to do this as is shown in the [example](./example/Gruntfile.js#L25).
+
+Once initialized, the module will output accessibility defect information to the Chrome Devtools console every time a component updates.
+
+## Deduplicating
+
+react-axe will deduplicate violations using the rule that raised the violation and the CSS selector and the failureSummary of the specific node. This will ensure that each unique issue will only be printed to the console once.
+
+## Debouncing
+
+The third argument to the exported function is the number of milliseconds to wait for component updates to cease before performing an analysis of all the changes. The changes will be batched and analyzed from the closest common ancestor of all the components that changed within the batch. This generally leads to the first analysis for a dynamic application, analyzing the entire page (which is what you want), while subsequent updates will only analyze a portion of the page (which is probably also what you want).
 
 ## Run the example
 
@@ -26,6 +38,7 @@ Run a build in the example directory and start a server to see React-aXe in acti
 ```
 cd example
 npm install
+npm install -g http-server
 npm start
 ```
 

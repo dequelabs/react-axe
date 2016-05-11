@@ -21,6 +21,9 @@ module.exports = function(grunt) {
 				files: {
 					'dist/bundle.js': ['build/*.js']
 				}
+			},
+			options: {
+				transform: ['envify']
 			}
 		}
 	});

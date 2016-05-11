@@ -3,7 +3,9 @@ var ReactDOM = require('react-dom');
 
 var axe = require('../../index.js');
 
-axe(React, ReactDOM, 1000);
+if (process.env.NODE_ENV !== 'production') {
+	axe(React, ReactDOM, 1000);
+}
 // This is more complex example that uses two components -
 // a service chooser form, and the individual services inside it.
 
