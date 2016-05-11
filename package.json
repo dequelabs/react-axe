@@ -1,6 +1,6 @@
 {
   "name": "react-axe",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,9 @@
   "license": "MIT",
   "dependencies": {
     "axe-core": "^1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dylanb/react-axe"
   }
 }
