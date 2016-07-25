@@ -50,7 +50,7 @@ react-axe uses advanced console logging features and only works in the Chrome br
 
 I have been asked how this is different from modules like react-a11y which test the jsx.
 
-The main difference is that react-axe tests the accessibility of the renered DOM. This is important because many accessibility issues exist at the intersection of the DOM and the CSS and unless you have a fully rendered DOM, you will get two sorts of inaccuracies:
+The main difference is that react-axe tests the accessibility of the rendered DOM. This is important because many accessibility issues exist at the intersection of the DOM and the CSS and unless you have a fully rendered DOM, you will get two sorts of inaccuracies:
 
 1) False negatives because of lacking information. Example is in order to test color contrast you must know the foreground and background colors, and
 2) False positives because the element being evaluated is not in its final state and the information to communicate this to the testing algorithm is not available. Example is an inert piece of code that will be augmented once it becomes active.
