@@ -125,7 +125,7 @@ function audit(r, rd, timeout) {
 			return retVal;
 		}
 	}
-	checkAndReport(document.body, timeout);
+	checkAndReport(document, timeout);
 }
 
 module.exports = audit;
