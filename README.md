@@ -32,6 +32,23 @@ react-axe will deduplicate violations using the rule that raised the violation a
 
 The third argument to the exported function is the number of milliseconds to wait for component updates to cease before performing an analysis of all the changes. The changes will be batched and analyzed from the closest common ancestor of all the components that changed within the batch. This generally leads to the first analysis for a dynamic application, analyzing the entire page (which is what you want), while subsequent updates will only analyze a portion of the page (which is probably also what you want).
 
+## Configuration
+
+There is a fourth optional argument that is a configuration object for axe-core. Read about the object here: https://github.com/dequelabs/axe-core/blob/master/doc/API.md#api-name-axeconfigure
+
+```
+var config = {
+	rules: [
+		{
+			id: "skip-link",
+			enabled: true
+		}
+	]
+};
+
+axe(React, ReactDOM, 1000, config);
+```
+
 ## Run the example
 
 Run a build in the example directory and start a server to see React-aXe in action in the Chrome Devtools console (opens on localhost:8888):
