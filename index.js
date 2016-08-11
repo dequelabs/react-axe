@@ -103,8 +103,12 @@ function checkAndReport(node, timeout) {
 }
 
 var _createClass;
-function audit(r, rd, timeout) {
+function audit(r, rd, timeout, conf) {
 	if (!_createClass) {
+		if (conf) {
+			axeCore.configure(conf);
+		}
+
 		_createClass = r.createClass;
 		r.createClass = function (...args) {
 			args[0]._componentDidMount = args[0].componentDidMount;
