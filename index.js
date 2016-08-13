@@ -54,7 +54,7 @@ function checkAndReport(node, timeout) {
 			// if the only common parent is the body, then analyze the whole page
 			n = undefined;
 		}
-		axe.a11yCheck(n, { reporter: 'v1' },function (results) {
+		axeCore.a11yCheck(n, { reporter: 'v1' },function (results) {
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
 					var key = node.target.toString() + result.id + node.failureSummary;
@@ -103,8 +103,12 @@ function checkAndReport(node, timeout) {
 }
 
 var _createClass;
-function audit(r, rd, timeout) {
+function audit(r, rd, timeout, conf) {
 	if (!_createClass) {
+		if (conf) {
+			axeCore.configure(conf);
+		}
+
 		_createClass = r.createClass;
 		r.createClass = function (...args) {
 			args[0]._componentDidMount = args[0].componentDidMount;
@@ -129,9 +133,3 @@ function audit(r, rd, timeout) {
 }
 
 module.exports = audit;
-
-if (window && window.getComputedStyle) {
-	var script = document.createElement('script');
-	script.text = axeCore.source;
-	document.body.appendChild(script);
-}
