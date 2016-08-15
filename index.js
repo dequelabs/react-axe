@@ -129,7 +129,7 @@ function audit(r, rd, timeout, conf) {
 			return retVal;
 		}
 	}
-	checkAndReport(document.body, timeout);
+	checkAndReport(document, timeout);
 }
 
 module.exports = audit;
