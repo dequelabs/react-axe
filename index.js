@@ -111,6 +111,7 @@ function audit(r, rd, timeout, conf) {
 
 		_createClass = r.createClass;
 		r.createClass = function (...args) {
+			console.log('test');
 			args[0]._componentDidMount = args[0].componentDidMount;
 			args[0].componentDidMount = function () {
 				if (this._componentDidMount) {
@@ -129,7 +130,7 @@ function audit(r, rd, timeout, conf) {
 			return retVal;
 		}
 	}
-	checkAndReport(document, timeout);
+	checkAndReport(document.body, timeout);
 }
 
 module.exports = audit;
