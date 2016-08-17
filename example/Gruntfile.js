@@ -11,15 +11,17 @@ module.exports = function(grunt) {
 				presets: ['react', 'es2015']
 			},
 			dist: {
-				files: {
-					'build/app.js': 'src/example.js'
-				}
+				files: [
+					{src: 'src/example.js', dest: 'build/example.js'},
+					{src: 'src/service.js', dest: 'build/service.js'},
+					{src: 'src/serviceChooser.js', dest: 'build/serviceChooser.js'}
+				]
 			}
 		},
 		browserify: {
 			dist: {
 				files: {
-					'dist/bundle.js': ['build/*.js']
+					'dist/bundle.js': ['build/example.js']
 				}
 			},
 			options: {
