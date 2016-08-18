@@ -147,9 +147,7 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 		var reactEl = _createElement.apply(this, [type, props].concat(children));
 
 		if(reactEl._owner){
-			setTimeout(function(){
-				addComponent(reactEl._owner._instance);
-			}, 0);
+			addComponent(reactEl._owner._instance);
 		}
 
 		return reactEl;
