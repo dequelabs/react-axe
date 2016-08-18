@@ -139,11 +139,7 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 
 	_createElement = React.createElement;
 
-	React.createElement = function (type, props) {
-		for (var _len = arguments.length, children = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-			children[_key - 2] = arguments[_key];
-		}
-
+	React.createElement = function (type, props, ...children) {
 		var reactEl = _createElement.apply(this, [type, props].concat(children));
 
 		if(reactEl._owner && reactEl._owner._instance){
