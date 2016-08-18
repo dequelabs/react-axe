@@ -122,7 +122,7 @@ function componentAfterRender(component) {
 }
 
 function addComponent(component) {
-	if (component._reactInternalInstance && !components[component._reactInternalInstance._debugID]) {
+	if (component && component._reactInternalInstance && !components[component._reactInternalInstance._debugID]) {
 		components[component._reactInternalInstance._debugID] = component;
 		componentAfterRender(component);
 	}
