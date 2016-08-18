@@ -122,7 +122,7 @@ function componentAfterRender(component) {
 }
 
 function addComponent(component) {
-	if (component && component._reactInternalInstance && !components[component._reactInternalInstance._debugID]) {
+	if (component._reactInternalInstance && !components[component._reactInternalInstance._debugID]) {
 		components[component._reactInternalInstance._debugID] = component;
 		componentAfterRender(component);
 	}
@@ -146,7 +146,7 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 
 		var reactEl = _createElement.apply(this, [type, props].concat(children));
 
-		if(reactEl._owner){
+		if(reactEl._owner && reactEl._owner._instance){
 			addComponent(reactEl._owner._instance);
 		}
 
