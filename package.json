@@ -1,6 +1,6 @@
 {
   "name": "react-axe",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,11 @@
     "lint",
     "test"
   ],
+  "contributors": [{
+    "name": "Niklas Holmberg (@badtant)"
+  },{
+    "name": "Dylan Barrell (dylan@barrell.com)"
+  }],
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MIT",
   "dependencies": {
