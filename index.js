@@ -152,9 +152,4 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 	checkAndReport(document.body, timeout);
 };
 
-/*reactAxe.restoreAll = function () {
-	React.createElement = _createElement;
-	after.restorePatchedMethods();
-};*/
-
 module.exports = reactAxe;
