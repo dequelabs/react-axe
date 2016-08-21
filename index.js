@@ -1,13 +1,19 @@
 var axeCore = require('axe-core');
+var after = require('./after');
+var React = undefined;
+var ReactDOM = undefined;
 
 var boldCourier = 'font-weight:bold;font-family:Courier;';
-var smallDefault = 'font-family:Menlo, monospace;font-size:x-small;';
-var critical = 'color:red;font-weight:bold;'
-var serious = 'color:red;font-weight:normal;'
-var moderate = 'color:orange;font-weight:bold;'
-var minor = 'color:orange;font-weight:normal;'
-var defaultReset = 'font-color:black;font-weight:normal;'
+var critical = 'color:red;font-weight:bold;';
+var serious = 'color:red;font-weight:normal;';
+var moderate = 'color:orange;font-weight:bold;';
+var minor = 'color:orange;font-weight:normal;';
+var defaultReset = 'font-color:black;font-weight:normal;';
+
 var timer;
+var timeout;
+var _createElement;
+var components = {};
 var nodes = [];
 var cache = {};
 
@@ -54,6 +60,7 @@ function checkAndReport(node, timeout) {
 			// if the only common parent is the body, then analyze the whole page
 			n = undefined;
 		}
+
 		axeCore.a11yCheck(n, { reporter: 'v1' },function (results) {
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
@@ -88,8 +95,7 @@ function checkAndReport(node, timeout) {
 						console.error(node.failureSummary);
 						console.log('HTML: %c%s', boldCourier, node.html);
 						if (!el) {
-							console.log('Selector: %c%s',
-							boldCourier, node.target.toString());
+							console.log('Selector: %c%s', boldCourier, node.target.toString());
 						} else {
 							console.log('Element: %o', el);
 						}
@@ -102,34 +108,53 @@ function checkAndReport(node, timeout) {
 	}, timeout);
 }
 
-var _createClass;
-function audit(r, rd, timeout, conf) {
-	if (!_createClass) {
-		if (conf) {
-			axeCore.configure(conf);
-		}
+function checkNode(component) {
+	var node = ReactDOM.findDOMNode(component);
 
-		_createClass = r.createClass;
-		r.createClass = function (...args) {
-			args[0]._componentDidMount = args[0].componentDidMount;
-			args[0].componentDidMount = function () {
-				if (this._componentDidMount) {
-					this._componentDidMount.apply(this, arguments);
-				}
-				checkAndReport(rd.findDOMNode(this), timeout)
-			};
-			args[0]._componentDidUpdate = args[0].componentDidUpdate;
-			args[0].componentDidUpdate = function () {
-				if (this._componentDidUpdate) {
-					this._componentDidUpdate.apply(this, arguments);
-				}
-				checkAndReport(rd.findDOMNode(this), timeout)
-			};
-			var retVal = _createClass.apply(this, args);
-			return retVal;
-		}
+	if(node){
+		checkAndReport(node, timeout)
 	}
-	checkAndReport(document.body, timeout);
 }
 
-module.exports = audit;
+function componentAfterRender(component) {
+	after(component, 'componentDidMount', checkNode);
+	after(component, 'componentDidUpdate', checkNode);
+}
+
+function addComponent(component) {
+	if (component._reactInternalInstance && !components[component._reactInternalInstance._debugID]) {
+		components[component._reactInternalInstance._debugID] = component;
+		componentAfterRender(component);
+	}
+}
+
+var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
+	React = _React;
+	ReactDOM = _ReactDOM;
+	timeout = timeout;
+
+	if (conf) {
+		axeCore.configure(conf);
+	}
+
+	_createElement = React.createElement;
+
+	React.createElement = function (type, props, ...children) {
+		var reactEl = _createElement.apply(this, [type, props].concat(children));
+
+		if(reactEl._owner && reactEl._owner._instance){
+			addComponent(reactEl._owner._instance);
+		}
+
+		return reactEl;
+	};
+
+	checkAndReport(document.body, timeout);
+};
+
+/*reactAxe.restoreAll = function () {
+	React.createElement = _createElement;
+	after.restorePatchedMethods();
+};*/
+
+module.exports = reactAxe;
