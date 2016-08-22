@@ -1,6 +1,6 @@
 {
   "name": "react-axe",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
