@@ -122,7 +122,7 @@ function componentAfterRender(component) {
 }
 
 function addComponent(component) {
-	if (component._reactInternalInstance && !components[component._reactInternalInstance._debugID]) {
+	if (component._reactInternalInstance) {
 		components[component._reactInternalInstance._debugID] = component;
 		componentAfterRender(component);
 	}
@@ -137,18 +137,19 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 		axeCore.configure(conf);
 	}
 
-	_createElement = React.createElement;
+	if (!_createElement) {
+		_createElement = React.createElement;
 
-	React.createElement = function (type, props, ...children) {
-		var reactEl = _createElement.apply(this, [type, props].concat(children));
+		React.createElement = function (type, props, ...children) {
+			var reactEl = _createElement.apply(this, [type, props].concat(children));
 
-		if(reactEl._owner && reactEl._owner._instance){
-			addComponent(reactEl._owner._instance);
-		}
+			if(reactEl._owner && reactEl._owner._instance){
+				addComponent(reactEl._owner._instance);
+			}
 
-		return reactEl;
-	};
-
+			return reactEl;
+		};
+	}
 	checkAndReport(document.body, timeout);
 };
 
