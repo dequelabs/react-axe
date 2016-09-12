@@ -140,8 +140,8 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 	if (!_createElement) {
 		_createElement = React.createElement;
 
-		React.createElement = function (type, props, ...children) {
-			var reactEl = _createElement.apply(this, [type, props].concat(children));
+		React.createElement = function () {
+			var reactEl = _createElement.apply(this, arguments);
 
 			if(reactEl._owner && reactEl._owner._instance){
 				addComponent(reactEl._owner._instance);
