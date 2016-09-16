@@ -5,8 +5,19 @@ var ServiceChooser = require('./serviceChooser');
 
 var axe = require('../../index.js');
 
+var axeConf = {
+	rules: [
+		{ id: 'heading-order', enabled: true },
+		{ id: 'label-title-only', enabled: true },
+		{ id: 'link-in-text-block', enabled: true },
+		{ id: 'region', enabled: true },
+		{ id: 'skip-link', enabled: true },
+		{ id: 'help-same-as-label', enabled: true }
+	]
+};
+
 if (process.env.NODE_ENV !== 'production') {
-	axe(React, ReactDOM, 1000);
+	axe(React, ReactDOM, 1000, axeConf);
 }
 
 var services = [

@@ -48,6 +48,16 @@ function getCommonParent(nodes) {
 	return path[path.length-1];
 }
 
+function logHtmlAndElement(node) {
+	var el = document.querySelector(node.target.toString());
+	console.log('HTML: %c%s', boldCourier, node.html);
+	if (!el) {
+		console.log('Selector: %c%s', boldCourier, node.target.toString());
+	} else {
+		console.log('Element: %o', el);
+	}
+}
+
 function checkAndReport(node, timeout) {
 	if (timer) {
 		clearTimeout(timer);
@@ -61,7 +71,7 @@ function checkAndReport(node, timeout) {
 			n = undefined;
 		}
 
-		axeCore.a11yCheck(n, { reporter: 'v1' },function (results) {
+		axeCore.a11yCheck(n, { reporter: 'v2' },function (results) {
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
 					var key = node.target.toString() + result.id + node.failureSummary;
@@ -91,13 +101,15 @@ function checkAndReport(node, timeout) {
 					}
 					console.groupCollapsed('%c%s: %c%s %s', fmt, result.impact, defaultReset, result.help, result.helpUrl);
 					result.nodes.forEach(function (node) {
-						var el = document.querySelector(node.target.toString());
-						console.error(node.failureSummary);
-						console.log('HTML: %c%s', boldCourier, node.html);
-						if (!el) {
-							console.log('Selector: %c%s', boldCourier, node.target.toString());
-						} else {
-							console.log('Element: %o', el);
+						console.error(node.any[0].message);
+						logHtmlAndElement(node);
+
+						if (node.any[0].relatedNodes.length > 0) {
+							console.groupCollapsed('Related nodes');
+							node.any[0].relatedNodes.forEach(function (relatedNode) {
+								logHtmlAndElement(relatedNode);
+							});
+							console.groupEnd();
 						}
 					});
 					console.groupEnd();
