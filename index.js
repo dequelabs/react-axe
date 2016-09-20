@@ -1,5 +1,6 @@
 var axeCore = require('axe-core');
 var after = require('./after');
+var failureSummary = require('./failure-summary');
 var React = undefined;
 var ReactDOM = undefined;
 
@@ -74,7 +75,7 @@ function checkAndReport(node, timeout) {
 		axeCore.a11yCheck(n, { reporter: 'v2' },function (results) {
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
-					var key = node.target.toString() + result.id + node.failureSummary;
+					var key = node.target.toString() + result.id + failureSummary(node);
 					var retVal = (!cache[key]);
 					cache[key] = key;
 					return retVal;
@@ -101,13 +102,17 @@ function checkAndReport(node, timeout) {
 					}
 					console.groupCollapsed('%c%s: %c%s %s', fmt, result.impact, defaultReset, result.help, result.helpUrl);
 					result.nodes.forEach(function (node) {
-						console.error(node.any[0].message);
+						console.error(failureSummary(node));
 						logHtmlAndElement(node);
 
-						if (node.any[0].relatedNodes.length > 0) {
+						let allAnyNone = node.all.concat(node.any, node.none);
+
+						if (allAnyNone.length > 0) {
 							console.groupCollapsed('Related nodes');
-							node.any[0].relatedNodes.forEach(function (relatedNode) {
-								logHtmlAndElement(relatedNode);
+							allAnyNone.forEach(function (check) {
+								check.relatedNodes.forEach(function (relatedNode) {
+									logHtmlAndElement(relatedNode);
+								});
 							});
 							console.groupEnd();
 						}
