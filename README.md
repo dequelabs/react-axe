@@ -61,7 +61,7 @@ npm start
 
 ## Compatibility
 
-react-axe uses advanced console logging features and only works in the Chrome browser
+react-axe uses advanced console logging features and works best in the Chrome browser, with limited functionality in Safari and Firefox.
 
 ## Advantages
 
