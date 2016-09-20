@@ -1,6 +1,5 @@
 var axeCore = require('axe-core');
 var after = require('./after');
-var failureSummary = require('./failure-summary');
 var React = undefined;
 var ReactDOM = undefined;
 
@@ -59,6 +58,27 @@ function logHtmlAndElement(node) {
 	}
 }
 
+function failureMessage(node, key) {
+	return axeCore._audit.data.failureSummaries[key].failureMessage(node[key].map(function (check) {
+		return check.message || '';
+	}));
+}
+
+function failureSummary(node, key) {
+	if (node[key].length > 0) {
+		console.error(failureMessage(node, key));
+		logHtmlAndElement(node);
+
+		console.groupCollapsed('Related nodes');
+		node[key].forEach(function (check) {
+			check.relatedNodes.forEach(function (relatedNode) {
+				logHtmlAndElement(relatedNode);
+			});
+		});
+		console.groupEnd();
+	}
+}
+
 function checkAndReport(node, timeout) {
 	if (timer) {
 		clearTimeout(timer);
@@ -75,7 +95,7 @@ function checkAndReport(node, timeout) {
 		axeCore.a11yCheck(n, { reporter: 'v2' },function (results) {
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
-					var key = node.target.toString() + result.id + failureSummary(node);
+					var key = node.target.toString() + result.id;
 					var retVal = (!cache[key]);
 					cache[key] = key;
 					return retVal;
@@ -102,20 +122,8 @@ function checkAndReport(node, timeout) {
 					}
 					console.groupCollapsed('%c%s: %c%s %s', fmt, result.impact, defaultReset, result.help, result.helpUrl);
 					result.nodes.forEach(function (node) {
-						console.error(failureSummary(node));
-						logHtmlAndElement(node);
-
-						let allAnyNone = node.all.concat(node.any, node.none);
-
-						if (allAnyNone.length > 0) {
-							console.groupCollapsed('Related nodes');
-							allAnyNone.forEach(function (check) {
-								check.relatedNodes.forEach(function (relatedNode) {
-									logHtmlAndElement(relatedNode);
-								});
-							});
-							console.groupEnd();
-						}
+						failureSummary(node, 'any');
+						failureSummary(node, 'none');
 					});
 					console.groupEnd();
 				});
