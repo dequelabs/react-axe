@@ -48,14 +48,17 @@ function getCommonParent(nodes) {
 	return path[path.length-1];
 }
 
-function logHtmlAndElement(node) {
+function logElement(node, logFn) {
 	var el = document.querySelector(node.target.toString());
-	console.log('HTML: %c%s', boldCourier, node.html);
 	if (!el) {
-		console.log('Selector: %c%s', boldCourier, node.target.toString());
+		logFn('Selector: %c%s', boldCourier, node.target.toString());
 	} else {
-		console.log('Element: %o', el);
+		logFn('Element: %o', el);
 	}
+}
+
+function logHtml(node) {
+	console.log('HTML: %c%s', boldCourier, node.html);
 }
 
 function failureMessage(node, key) {
@@ -66,15 +69,17 @@ function failureMessage(node, key) {
 
 function failureSummary(node, key) {
 	if (node[key].length > 0) {
-		console.error(failureMessage(node, key));
-		logHtmlAndElement(node);
-
-		console.groupCollapsed('Related nodes');
-		node[key].forEach(function (check) {
-			check.relatedNodes.forEach(function (relatedNode) {
-				logHtmlAndElement(relatedNode);
-			});
-		});
+		logElement(node, console.groupCollapsed);
+			logHtml(node);
+			console.error(failureMessage(node, key));
+			console.groupCollapsed('Related nodes');
+				node[key].forEach(function (check) {
+					check.relatedNodes.forEach(function (relatedNode) {
+						logElement(relatedNode, console.log);
+						logHtml(relatedNode);
+					});
+				});
+			console.groupEnd();
 		console.groupEnd();
 	}
 }
