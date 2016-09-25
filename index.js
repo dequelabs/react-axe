@@ -18,178 +18,178 @@ var nodes = [];
 var cache = {};
 
 function getPath(node) {
-  var path = [];
-  do {
-    path.push(node.parentNode);
-    node = node.parentNode;
-  } while (node && node.nodeName.toLowerCase() !== 'html')
-  if (!node || !node.parentNode) {
-    return null;
-  }
-  return path.reverse();
+	var path = [];
+	do {
+		path.push(node.parentNode);
+		node = node.parentNode;
+	} while (node && node.nodeName.toLowerCase() !== 'html')
+	if (!node || !node.parentNode) {
+		return null;
+	}
+	return path.reverse();
 }
 
 function getCommonParent(nodes) {
-  var path, nextPath;
-  if (nodes.length === 1) {
-    return nodes.pop();
-  }
-  while (!path && nodes.length) {
-    path = getPath(nodes.pop());
-  }
-  while (nodes.length) {
-    nextPath = getPath(nodes.pop());
-    if (nextPath) {
-      path = path.filter(function (node, index) {
-        return (nextPath.length > index && nextPath[index] === node);
-      });
-    }
-  }
-  return path[path.length - 1];
+	var path, nextPath;
+	if (nodes.length === 1) {
+		return nodes.pop();
+	}
+	while (!path && nodes.length) {
+		path = getPath(nodes.pop());
+	}
+	while (nodes.length) {
+		nextPath = getPath(nodes.pop());
+		if (nextPath) {
+			path = path.filter(function (node, index) {
+				return (nextPath.length > index && nextPath[index] === node);
+			});
+		}
+	}
+	return path[path.length - 1];
 }
 
 function logElement(node, logFn) {
-  var el = document.querySelector(node.target.toString());
-  if (!el) {
-    logFn('Selector: %c%s', boldCourier, node.target.toString());
-  } else {
-    logFn('Element: %o', el);
-  }
+	var el = document.querySelector(node.target.toString());
+	if (!el) {
+		logFn('Selector: %c%s', boldCourier, node.target.toString());
+	} else {
+		logFn('Element: %o', el);
+	}
 }
 
 function logHtml(node) {
-  console.log('HTML: %c%s', boldCourier, node.html);
+	console.log('HTML: %c%s', boldCourier, node.html);
 }
 
 function logFailureMessage(node, key) {
-  var message = axeCore._audit.data.failureSummaries[key].failureMessage(node[key].map(function (check) {
-    return check.message || '';
-  }));
+	var message = axeCore._audit.data.failureSummaries[key].failureMessage(node[key].map(function (check) {
+		return check.message || '';
+	}));
 
-  console.error(message);
+	console.error(message);
 }
 
 function failureSummary(node, key) {
-  if (node[key].length > 0) {
-    logElement(node, console.groupCollapsed);
-    logHtml(node);
-    logFailureMessage(node, key);
+	if (node[key].length > 0) {
+		logElement(node, console.groupCollapsed);
+		logHtml(node);
+		logFailureMessage(node, key);
 
-    var relatedNodes = [];
-    node[key].forEach(function (check) {
-      relatedNodes = relatedNodes.concat(check.relatedNodes);
-    });
+		var relatedNodes = [];
+		node[key].forEach(function (check) {
+			relatedNodes = relatedNodes.concat(check.relatedNodes);
+		});
 
-    if (relatedNodes.length > 0) {
-      console.groupCollapsed('Related nodes');
-      relatedNodes.forEach(function (relatedNode) {
-        logElement(relatedNode, console.log);
-        logHtml(relatedNode);
-      });
-      console.groupEnd();
-    }
+		if (relatedNodes.length > 0) {
+			console.groupCollapsed('Related nodes');
+			relatedNodes.forEach(function (relatedNode) {
+				logElement(relatedNode, console.log);
+				logHtml(relatedNode);
+			});
+			console.groupEnd();
+		}
 
-    console.groupEnd();
-  }
+		console.groupEnd();
+	}
 }
 
 function checkAndReport(node, timeout) {
-  if (timer) {
-    clearTimeout(timer);
-    timer = undefined;
-  }
-  nodes.push(node);
-  timer = setTimeout(function () {
-    var n = getCommonParent(nodes);
-    if (n.nodeName.toLowerCase() === 'html') {
-      // if the only common parent is the body, then analyze the whole page
-      n = undefined;
-    }
+	if (timer) {
+		clearTimeout(timer);
+		timer = undefined;
+	}
+	nodes.push(node);
+	timer = setTimeout(function () {
+		var n = getCommonParent(nodes);
+		if (n.nodeName.toLowerCase() === 'html') {
+			// if the only common parent is the body, then analyze the whole page
+			n = undefined;
+		}
 
-    axeCore.a11yCheck(n, {reporter: 'v2'}, function (results) {
-      results.violations = results.violations.filter(function (result) {
-        result.nodes = result.nodes.filter(function (node) {
-          var key = node.target.toString() + result.id;
-          var retVal = (!cache[key]);
-          cache[key] = key;
-          return retVal;
-        });
-        return (!!result.nodes.length);
-      });
-      if (results.violations.length) {
-        console.group('%cNew aXe issues', serious)
-        results.violations.forEach(function (result) {
-          var fmt;
-          switch (result.impact) {
-            case 'critical':
-              fmt = critical;
-              break;
-            case 'serious':
-              fmt = serious;
-              break;
-            case 'moderate':
-              fmt = moderate;
-              break;
-            case 'minor':
-              fmt = minor;
-              break;
-          }
-          console.groupCollapsed('%c%s: %c%s %s', fmt, result.impact, defaultReset, result.help, result.helpUrl);
-          result.nodes.forEach(function (node) {
-            failureSummary(node, 'any');
-            failureSummary(node, 'none');
-          });
-          console.groupEnd();
-        });
-        console.groupEnd();
-      }
-    });
-  }, timeout);
+		axeCore.a11yCheck(n, {reporter: 'v2'}, function (results) {
+			results.violations = results.violations.filter(function (result) {
+				result.nodes = result.nodes.filter(function (node) {
+					var key = node.target.toString() + result.id;
+					var retVal = (!cache[key]);
+					cache[key] = key;
+					return retVal;
+				});
+				return (!!result.nodes.length);
+			});
+			if (results.violations.length) {
+				console.group('%cNew aXe issues', serious)
+				results.violations.forEach(function (result) {
+					var fmt;
+					switch (result.impact) {
+						case 'critical':
+							fmt = critical;
+							break;
+						case 'serious':
+							fmt = serious;
+							break;
+						case 'moderate':
+							fmt = moderate;
+							break;
+						case 'minor':
+							fmt = minor;
+							break;
+					}
+					console.groupCollapsed('%c%s: %c%s %s', fmt, result.impact, defaultReset, result.help, result.helpUrl);
+					result.nodes.forEach(function (node) {
+						failureSummary(node, 'any');
+						failureSummary(node, 'none');
+					});
+					console.groupEnd();
+				});
+				console.groupEnd();
+			}
+		});
+	}, timeout);
 }
 
 function checkNode(component) {
-  var node = ReactDOM.findDOMNode(component);
+	var node = ReactDOM.findDOMNode(component);
 
-  if (node) {
-    checkAndReport(node, timeout)
-  }
+	if (node) {
+		checkAndReport(node, timeout)
+	}
 }
 
 function componentAfterRender(component) {
-  after(component, 'componentDidMount', checkNode);
-  after(component, 'componentDidUpdate', checkNode);
+	after(component, 'componentDidMount', checkNode);
+	after(component, 'componentDidUpdate', checkNode);
 }
 
 function addComponent(component) {
-  if (component._reactInternalInstance) {
-    components[component._reactInternalInstance._debugID] = component;
-    componentAfterRender(component);
-  }
+	if (component._reactInternalInstance) {
+		components[component._reactInternalInstance._debugID] = component;
+		componentAfterRender(component);
+	}
 }
 
 var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
-  React = _React;
-  ReactDOM = _ReactDOM;
-  timeout = _timeout;
+	React = _React;
+	ReactDOM = _ReactDOM;
+	timeout = _timeout;
 
-  if (conf) {
-    axeCore.configure(conf);
-  }
+	if (conf) {
+		axeCore.configure(conf);
+	}
 
-  if (!_createElement) {
-    _createElement = React.createElement;
+	if (!_createElement) {
+		_createElement = React.createElement;
 
-    React.createElement = function () {
-      var reactEl = _createElement.apply(this, arguments);
+		React.createElement = function () {
+			var reactEl = _createElement.apply(this, arguments);
 
-      if (reactEl._owner && reactEl._owner._instance) {
-        addComponent(reactEl._owner._instance);
-      }
+			if (reactEl._owner && reactEl._owner._instance) {
+				addComponent(reactEl._owner._instance);
+			}
 
-      return reactEl;
-    };
-  }
-  checkAndReport(document.body, timeout);
+			return reactEl;
+		};
+	}
+	checkAndReport(document.body, timeout);
 };
 
 module.exports = reactAxe;
