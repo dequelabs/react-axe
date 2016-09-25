@@ -5,15 +5,15 @@ var after = function after(host, name, cb) {
   var restoreFn = undefined;
 
   if (originalFn) {
-    host[name] = function(...args) {
-      originalFn.apply(this, args);
+    host[name] = function () {
+      originalFn.apply(this, arguments);
       cb(host);
     };
     restoreFn = function () {
       return host[name] = originalFn;
     };
   } else {
-    host[name] = function() {
+    host[name] = function () {
       cb(host);
     };
     restoreFn = function () {

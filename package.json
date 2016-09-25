@@ -4,7 +4,8 @@
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "./node_modules/.bin/eslint *.js"
   },
   "keywords": [
     "accessibility",
@@ -21,6 +22,9 @@
   "license": "MIT",
   "dependencies": {
     "axe-core": "~2.0.5"
+  },
+  "devDependencies": {
+    "eslint": "~3.6.0"
   },
   "repository": {
     "type": "git",
