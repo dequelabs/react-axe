@@ -175,6 +175,14 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 	if (conf) {
 		axeCore.configure(conf);
 	}
+	axeCore.configure({
+		checks: [{
+			id: "color-contrast",
+			options: {
+				noScroll: true
+			}
+		}]
+	});
 
 	if (!_createElement) {
 		_createElement = React.createElement;
