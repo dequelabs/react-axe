@@ -25,7 +25,7 @@
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MIT",
   "dependencies": {
-    "axe-core": "~2.1.7"
+    "axe-core": "~2.2.0"
   },
   "devDependencies": {
     "eslint": "~3.6.0"
