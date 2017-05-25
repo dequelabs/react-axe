@@ -23,7 +23,7 @@
     "name": "Marcy Sutton (@marcysutton)"
   }],
   "author": "Dylan Barrell (dylan@barrell.com)",
-  "license": "MIT",
+  "license": "MPL-2.0",
   "dependencies": {
     "axe-core": "~2.2.1"
   },
@@ -32,6 +32,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dylanb/react-axe"
+    "url": "https://github.com/dequelabs/react-axe"
   }
 }
