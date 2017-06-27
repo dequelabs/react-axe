@@ -1,6 +1,6 @@
 {
   "name": "react-axe",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MPL-2.0",
   "dependencies": {
-    "axe-core": "~2.2.3"
+    "axe-core": "~2.3.1"
   },
   "devDependencies": {
     "eslint": "~3.6.0"
