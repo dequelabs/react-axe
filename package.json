@@ -1,6 +1,6 @@
 {
   "name": "react-axe",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
@@ -13,19 +13,24 @@
     "lint",
     "test"
   ],
-  "contributors": [{
-    "name": "Niklas Holmberg (@badtant)"
-  },{
-    "name": "Dylan Barrell (dylan@barrell.com)"
-  },{
-    "name": "Jennifer Stern (@junyper)"
-  },{
-    "name": "Marcy Sutton (@marcysutton)"
-  }],
+  "contributors": [
+    {
+      "name": "Niklas Holmberg (@badtant)"
+    },
+    {
+      "name": "Dylan Barrell (dylan@barrell.com)"
+    },
+    {
+      "name": "Jennifer Stern (@junyper)"
+    },
+    {
+      "name": "Marcy Sutton (@marcysutton)"
+    }
+  ],
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MPL-2.0",
   "dependencies": {
-    "axe-core": "~2.3.1"
+    "axe-core": "^2.6.0"
   },
   "devDependencies": {
     "eslint": "~3.6.0"
