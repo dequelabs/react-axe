@@ -1,3 +1,4 @@
+/* global document, window */
 var axeCore = require('axe-core');
 var after = require('./after');
 var React = undefined;
@@ -22,7 +23,7 @@ function getPath(node) {
 	do {
 		path.push(node.parentNode);
 		node = node.parentNode;
-	} while (node && node.nodeName.toLowerCase() !== 'html')
+	} while (node && node.nodeName.toLowerCase() !== 'html');
 	if (!node || !node.parentNode) {
 		return null;
 	}
@@ -117,7 +118,7 @@ function checkAndReport(node, timeout) {
 				return (!!result.nodes.length);
 			});
 			if (results.violations.length) {
-				console.group('%cNew aXe issues', serious)
+				console.group('%cNew aXe issues', serious);
 				results.violations.forEach(function (result) {
 					var fmt;
 					switch (result.impact) {
@@ -131,6 +132,9 @@ function checkAndReport(node, timeout) {
 							fmt = moderate;
 							break;
 						case 'minor':
+							fmt = minor;
+							break;
+						default:
 							fmt = minor;
 							break;
 					}
@@ -151,7 +155,7 @@ function checkNode(component) {
 	var node = ReactDOM.findDOMNode(component);
 
 	if (node) {
-		checkAndReport(node, timeout)
+		checkAndReport(node, timeout);
 	}
 }
 
