@@ -1,12 +1,12 @@
+/* global document, window */
 var axeCore = require('axe-core');
 
 var boldCourier = 'font-weight:bold;font-family:Courier;';
-var smallDefault = 'font-family:Menlo, monospace;font-size:x-small;';
-var critical = 'color:red;font-weight:bold;'
-var serious = 'color:red;font-weight:normal;'
-var moderate = 'color:orange;font-weight:bold;'
-var minor = 'color:orange;font-weight:normal;'
-var defaultReset = 'font-color:black;font-weight:normal;'
+var critical = 'color:red;font-weight:bold;';
+var serious = 'color:red;font-weight:normal;';
+var moderate = 'color:orange;font-weight:bold;';
+var minor = 'color:orange;font-weight:normal;';
+var defaultReset = 'font-color:black;font-weight:normal;';
 var timer;
 var nodes = [];
 var cache = {};
@@ -16,7 +16,7 @@ function getPath(node) {
 	do {
 		path.push(node.parentNode);
 		node = node.parentNode;
-	} while (node && node.nodeName.toLowerCase() !== 'html')
+	} while (node && node.nodeName.toLowerCase() !== 'html');
 	if (!node || !node.parentNode) {
 		return null;
 	}
@@ -39,7 +39,7 @@ function getCommonParent(nodes) {
 			});
 		}
 	}
-	return path[path.length-1];
+	return path[path.length - 1];
 }
 
 function checkAndReport(node, timeout) {
@@ -54,7 +54,7 @@ function checkAndReport(node, timeout) {
 			// if the only common parent is the body, then analyze the whole page
 			n = undefined;
 		}
-		axe.a11yCheck(n, { reporter: 'v1' },function (results) {
+		axeCore.a11yCheck(n, { reporter: 'v1' }, function (results) {
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
 					var key = node.target.toString() + result.id + node.failureSummary;
@@ -65,22 +65,23 @@ function checkAndReport(node, timeout) {
 				return (!!result.nodes.length);
 			});
 			if (results.violations.length) {
-				console.group('%cNew aXe issues', serious)
+				console.group('%cNew aXe issues', serious);
 				results.violations.forEach(function (result) {
 					var fmt;
-					switch(result.impact) {
-						case 'critical':
-							fmt = critical;
-							break;
-						case 'serious':
-							fmt = serious;
-							break;
-						case 'moderate':
-							fmt = moderate;
-							break;
-						case 'minor':
-							fmt = minor;
-							break;
+					switch (result.impact) {
+					case 'critical':
+						fmt = critical;
+						break;
+					case 'serious':
+						fmt = serious;
+						break;
+					case 'moderate':
+						fmt = moderate;
+						break;
+					case 'minor':
+					default:
+						fmt = minor;
+						break;
 					}
 					console.groupCollapsed('%c%s: %c%s %s', fmt, result.impact, defaultReset, result.help, result.helpUrl);
 					result.nodes.forEach(function (node) {
@@ -88,8 +89,7 @@ function checkAndReport(node, timeout) {
 						console.error(node.failureSummary);
 						console.log('HTML: %c%s', boldCourier, node.html);
 						if (!el) {
-							console.log('Selector: %c%s',
-							boldCourier, node.target.toString());
+							console.log('Selector: %c%s', boldCourier, node.target.toString());
 						} else {
 							console.log('Element: %o', el);
 						}
@@ -112,18 +112,18 @@ function audit(r, rd, timeout) {
 				if (this._componentDidMount) {
 					this._componentDidMount.apply(this, arguments);
 				}
-				checkAndReport(rd.findDOMNode(this), timeout)
+				checkAndReport(rd.findDOMNode(this), timeout);
 			};
 			args[0]._componentDidUpdate = args[0].componentDidUpdate;
 			args[0].componentDidUpdate = function () {
 				if (this._componentDidUpdate) {
 					this._componentDidUpdate.apply(this, arguments);
 				}
-				checkAndReport(rd.findDOMNode(this), timeout)
+				checkAndReport(rd.findDOMNode(this), timeout);
 			};
 			var retVal = _createClass.apply(this, args);
 			return retVal;
-		}
+		};
 	}
 	checkAndReport(document.body, timeout);
 }

@@ -1,0 +1,21 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "indent": ["error", "tab"],
+        "no-tabs": 0,
+        "no-loop-func": 0,
+        "no-shadow": 0,
+        "no-var": 0,
+        "one-var": 0,
+        "one-var-declaration-per-line": 0,
+        "vars-on-top": 0,
+        "prefer-arrow-callback": 0,
+        "func-names": 0,
+        "no-console": 0,
+        "no-underscore-dangle": 0,
+        "prefer-spread": 0,
+        "prefer-rest-params": 0,
+        "react/no-find-dom-node": 0,
+        "no-param-reassign": 0
+    }
+}
