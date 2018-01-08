@@ -30,7 +30,7 @@
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MPL-2.0",
   "dependencies": {
-    "axe-core": "^2.6.0"
+    "axe-core": "^2.6.1"
   },
   "devDependencies": {
     "eslint": "~3.6.0"

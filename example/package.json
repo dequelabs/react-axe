@@ -10,7 +10,7 @@
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MIT",
   "dependencies": {
-    "axe-core": "~2.2.1",
+    "axe-core": "^2.6.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0"
   },
