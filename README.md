@@ -2,7 +2,7 @@
 
 Install the module from NPM or elsewhere
 
-```
+```sh
 npm install --save-dev react-axe
 ```
 
@@ -10,13 +10,13 @@ npm install --save-dev react-axe
 
 Call the exported function passing in the React and ReactDOM objects as well as a timing delay in milliseconds that will be observed between each component change and the time the analysis starts.
 
-```
+```js
 var React = require('react');
 var ReactDOM = require('react-dom');
 
 if (process.env.NODE_ENV !== 'production') {
-	var axe = require('react-axe');
-	axe(React, ReactDOM, 1000);
+  var axe = require('react-axe');
+  axe(React, ReactDOM, 1000);
 }
 ```
 
@@ -36,14 +36,14 @@ The third argument to the exported function is the number of milliseconds to wai
 
 There is a fourth optional argument that is a configuration object for axe-core. Read about the object here: https://github.com/dequelabs/axe-core/blob/master/doc/API.md#api-name-axeconfigure
 
-```
+```js
 var config = {
-	rules: [
-		{
-			id: "skip-link",
-			enabled: true
-		}
-	]
+  rules: [
+    {
+      id: "skip-link",
+      enabled: true
+    }
+  ]
 };
 
 axe(React, ReactDOM, 1000, config);
@@ -52,7 +52,8 @@ axe(React, ReactDOM, 1000, config);
 ## Run the example
 
 Run a build in the example directory and start a server to see React-aXe in action in the Chrome Devtools console (opens on localhost:8888):
-```
+
+```sh
 cd example
 npm install
 npm install -g http-server
