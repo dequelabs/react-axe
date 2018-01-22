@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var GlobalHeader = require('./globalHeader');
 var ServiceChooser = require('./serviceChooser');
 
 var axe = require('../../index.js');
@@ -30,6 +31,9 @@ var services = [
 // Render the ServiceChooser component, and pass the array of services
 
 ReactDOM.render(
-	<ServiceChooser items={ services } />,
+	<div>
+		<GlobalHeader />
+		<ServiceChooser items={ services } />
+	</div>,
 	document.getElementById('container')
 );
