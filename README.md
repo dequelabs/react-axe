@@ -59,6 +59,26 @@ npm install -g http-server
 npm start
 ```
 
+## Run the tests
+
+Install dependencies in the example app and then run Cypress in the root directory of react-axe.
+```
+cd example
+npm install
+cd ../
+npm test
+```
+
+Or, just run the tests:
+```
+npm test
+```
+
+To debug tests in the Cypress application:
+```
+npm run test:debug
+```
+
 ## Compatibility
 
 react-axe uses advanced console logging features and works best in the Chrome browser, with limited functionality in Safari and Firefox.

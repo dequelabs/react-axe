@@ -4,7 +4,9 @@
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretest": "cd example && grunt default && http-server . &",
+    "test": "cypress run",
+    "test:debug": "cypress open",
     "eslint": "./node_modules/.bin/eslint *.js"
   },
   "keywords": [
@@ -25,6 +27,9 @@
     },
     {
       "name": "Marcy Sutton (@marcysutton)"
+    },
+    {
+      "name": "Wilco Fiers (@wilcofiers)"
     }
   ],
   "author": "Dylan Barrell (dylan@barrell.com)",
@@ -33,7 +38,11 @@
     "axe-core": "^2.6.1"
   },
   "devDependencies": {
-    "eslint": "~3.6.0"
+    "cypress": "^1.4.1",
+    "eslint": "~3.6.0",
+    "http-server": "^0.10.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "repository": {
     "type": "git",
