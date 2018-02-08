@@ -35,7 +35,7 @@
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MPL-2.0",
   "dependencies": {
-    "axe-core": "^2.6.1"
+    "axe-core": "^3.0.0-alpha.9"
   },
   "devDependencies": {
     "cypress": "^1.4.1",
