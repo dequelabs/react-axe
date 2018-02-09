@@ -66,10 +66,11 @@ Install dependencies in the example app and then run Cypress in the root directo
 cd example
 npm install
 cd ../
+npm install
 npm test
 ```
 
-Or, just run the tests:
+Once you’ve installed everything at least once, you can just run the tests:
 ```
 npm test
 ```
