@@ -103,10 +103,10 @@ function checkAndReport(node, timeout) {
 		var n = getCommonParent(nodes);
 		if (n.nodeName.toLowerCase() === 'html') {
 			// if the only common parent is the body, then analyze the whole page
-			n = undefined;
+			n = document;
 		}
-
-		axeCore.a11yCheck(n, {reporter: 'v2'}, function (results) {
+		axeCore.run(n, { reporter: 'v2' }, function (error, results) {
+			if (error) { throw error; }
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
 					var key = node.target.toString() + result.id;

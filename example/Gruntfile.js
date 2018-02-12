@@ -13,6 +13,7 @@ module.exports = function(grunt) {
 			dist: {
 				files: [
 					{src: 'src/example.js', dest: 'build/example.js'},
+					{src: 'src/globalHeader.js', dest: 'build/globalHeader.js'},
 					{src: 'src/service.js', dest: 'build/service.js'},
 					{src: 'src/serviceChooser.js', dest: 'build/serviceChooser.js'}
 				]
