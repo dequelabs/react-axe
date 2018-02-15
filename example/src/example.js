@@ -1,11 +1,12 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import ready from 'document-ready-promise';
 
 var GlobalHeader = require('./globalHeader');
 var ServiceChooser = require('./serviceChooser');
 
 var axe = require('../../index.js');
-
 var axeConf = {
 	rules: [
 		{ id: 'heading-order', enabled: true },
@@ -30,10 +31,12 @@ var services = [
 
 // Render the ServiceChooser component, and pass the array of services
 
-ReactDOM.render(
-	<div>
-		<GlobalHeader />
-		<ServiceChooser items={ services } />
-	</div>,
-	document.getElementById('container')
-);
+ready().then(() => {
+	const mountNode = document.querySelector('#container');
+	mountNode && ReactDOM.render(
+		<div>
+			<GlobalHeader />
+			<ServiceChooser items={ services } />
+		</div>, mountNode
+	);
+});

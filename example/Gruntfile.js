@@ -3,6 +3,7 @@ module.exports = function(grunt) {
 	// Do grunt-related things in here
 	grunt.loadNpmTasks('grunt-babel');
 	grunt.loadNpmTasks('grunt-browserify');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON("package.json"),
@@ -19,6 +20,16 @@ module.exports = function(grunt) {
 				]
 			}
 		},
+		copy: {
+			dist: {
+				files: [{
+					cwd: 'node_modules/webcomponents.js',
+					src: 'webcomponents.min.js',
+					dest: 'dist/',
+					expand: true
+				}]
+			}
+		},
 		browserify: {
 			dist: {
 				files: {
@@ -26,10 +37,10 @@ module.exports = function(grunt) {
 				}
 			},
 			options: {
-				transform: ['envify']
+				transform: ['envify', ['browserify-css', { global: true }]]
 			}
 		}
 	});
 
-	grunt.registerTask('default', ['babel', 'browserify']);
+	grunt.registerTask('default', ['babel', 'copy', 'browserify']);
 };
