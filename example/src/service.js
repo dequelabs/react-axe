@@ -1,6 +1,7 @@
-var React = require('react');
+import React from 'react';
+import createReactClass from 'create-react-class';
 
-module.exports = React.createClass({
+module.exports = createReactClass({
     getInitialState: function(){
         return { active: false };
     },

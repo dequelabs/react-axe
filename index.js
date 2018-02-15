@@ -196,6 +196,8 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 
 			if (reactEl._owner && reactEl._owner._instance) {
 				addComponent(reactEl._owner._instance);
+			} else if (reactEl._owner && reactEl._owner.stateNode) {
+				addComponent(reactEl._owner.stateNode);
 			}
 
 			return reactEl;

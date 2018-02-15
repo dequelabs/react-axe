@@ -1,8 +1,11 @@
-var React = require('react');
+import React from 'react';
+import ShadowDOM from 'react-shadow';
+import createReactClass from 'create-react-class';
 
-var Service = require('./service');
+import styles from './services.css';
+import Service from './service';
 
-module.exports = React.createClass({
+module.exports = createReactClass({
     getInitialState: function() {
         return { total: 0 };
     },
@@ -16,11 +19,14 @@ module.exports = React.createClass({
             // Notice that I pass the self.addTotal function to the component.
             return <Service key={s.name} name={s.name} price={s.price} active={s.active} addTotal={self.addTotal} />;
         });
-        return <div>
-        <div id="services">
-            {services}
-            <p id="total">Total <b>${this.state.total.toFixed(2)}</b></p>
-        </div>
-        </div>;
+        return <ShadowDOM>
+            <service-chooser>
+                <div id="services">
+                    {services}
+                    <p id="total">Total <b>${this.state.total.toFixed(2)}</b></p>
+                </div>
+                <style type="text/css">{styles}</style>
+            </service-chooser>
+        </ShadowDOM>;
     }
 });
