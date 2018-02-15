@@ -26,4 +26,25 @@ describe('React-axe', function () {
 			});
 		});
 	});
+
+  it('should run axe inside of Shadow DOM', function () {
+    cy.visit('http://localhost:8080')
+    .then(function(win) {
+      const groupCollapsed = cy.spy(win.console, "groupCollapsed");
+      const colorMessage = "Elements must have sufficient color contrast";
+
+      let serviceChooser;
+      cy.get('service-chooser').first().then(function(node) {
+        serviceChooser = node[0];
+      });
+
+      axe(React, ReactDOM, 0);
+
+      cy.wait(1500)
+      .then(function() {
+        expect(groupCollapsed.args[2][4]).to.equal(colorMessage);
+        expect(groupCollapsed.args[3][1]).to.equal(serviceChooser);
+      });
+    });
+  });
 });

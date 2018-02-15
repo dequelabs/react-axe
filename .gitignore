@@ -2,4 +2,4 @@ node_modules
 example/node_modules
 example/build
 example/dist
-example/package-lock-json
+example/package-lock.json
