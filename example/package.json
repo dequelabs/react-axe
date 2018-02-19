@@ -10,10 +10,9 @@
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MIT",
   "dependencies": {
-    "axe-core": "^3.0.0-alpha.9",
+    "axe-core": "^3.0.0-beta.1",
     "browserify": "^16.0.0",
     "create-react-class": "^15.6.3",
-    "document-ready-promise": "^3.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-shadow": "^16.2.0",

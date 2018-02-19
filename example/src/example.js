@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ready from 'document-ready-promise';
-
 var GlobalHeader = require('./globalHeader');
 var ServiceChooser = require('./serviceChooser');
 
@@ -31,7 +29,7 @@ var services = [
 
 // Render the ServiceChooser component, and pass the array of services
 
-ready().then(() => {
+document.addEventListener('DOMContentLoaded', function() {
 	const mountNode = document.querySelector('#container');
 	mountNode && ReactDOM.render(
 		<div>
