@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom'
 
 const axe = require('../../index')
 
+function filterLogs(args, type) {
+  let filtered = [];
+  args.forEach(function(arg, index) {
+    if (arg.length === 2 && arg[1] === type) {
+      filtered = arg[1];
+    } else if (arg.length === 6 && arg[4] === type) {
+      filtered = arg[4];
+    }
+  });
+  return filtered;
+}
+
 describe('React-axe', function () {
 	it('should assert that page content is correct', function () {
 		cy.visit('http://localhost:8080');
@@ -16,9 +28,7 @@ describe('React-axe', function () {
 			cy.spy(win.console, "groupCollapsed");
 			cy.spy(win.console, "groupEnd");
 
-			axe(React, ReactDOM, 0);
-
-			cy.wait(1500)
+			axe(React, ReactDOM, 0)
 			.then(function() {
 				expect(win.console.group).to.be.calledWith('%cNew aXe issues', 'color:red;font-weight:normal;');
 				expect(win.console.groupCollapsed).to.be.calledWith('%c%s: %c%s %s');
@@ -38,12 +48,10 @@ describe('React-axe', function () {
         serviceChooser = node[0];
       });
 
-      axe(React, ReactDOM, 0);
-
-      cy.wait(1500)
+      axe(React, ReactDOM, 0)
       .then(function() {
-        expect(groupCollapsed.args[2][4]).to.equal(colorMessage);
-        expect(groupCollapsed.args[3][1]).to.equal(serviceChooser);
+        expect(filterLogs(groupCollapsed.args, colorMessage)).to.equal(colorMessage);
+        expect(filterLogs(groupCollapsed.args, serviceChooser)).to.equal(serviceChooser);
       });
     });
   });

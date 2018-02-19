@@ -1,4 +1,4 @@
-/* global document, window */
+/* global document, window, Promise */
 var axeCore = require('axe-core');
 var after = require('./after');
 var React = undefined;
@@ -11,8 +11,6 @@ var moderate = 'color:orange;font-weight:bold;';
 var minor = 'color:orange;font-weight:normal;';
 var defaultReset = 'font-color:black;font-weight:normal;';
 
-var timer;
-var timeout;
 var _createElement;
 var components = {};
 var nodes = [];
@@ -94,20 +92,16 @@ function failureSummary(node, key) {
 	}
 }
 
-function checkAndReport(node, timeout) {
-	if (timer) {
-		clearTimeout(timer);
-		timer = undefined;
-	}
+function checkAndReport(node) {
 	nodes.push(node);
-	timer = setTimeout(function () {
+	return new Promise(function(res, rej) {
 		var n = getCommonParent(nodes);
 		if (n.nodeName.toLowerCase() === 'html') {
 			// if the only common parent is the body, then analyze the whole page
 			n = document;
 		}
 		axeCore.run(n, { reporter: 'v2' }, function (error, results) {
-			if (error) { throw error; }
+			if (error) { throw rej(error); }
 			results.violations = results.violations.filter(function (result) {
 				result.nodes = result.nodes.filter(function (node) {
 					var key = node.target.toString() + result.id;
@@ -147,15 +141,16 @@ function checkAndReport(node, timeout) {
 				});
 				console.groupEnd();
 			}
+			res();
 		});
-	}, timeout);
+	});
 }
 
 function checkNode(component) {
 	var node = ReactDOM.findDOMNode(component);
 
 	if (node) {
-		checkAndReport(node, timeout);
+		checkAndReport(node);
 	}
 }
 
@@ -171,10 +166,9 @@ function addComponent(component) {
 	}
 }
 
-var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
+var reactAxe = function reactAxe(_React, _ReactDOM, conf) {
 	React = _React;
 	ReactDOM = _ReactDOM;
-	timeout = _timeout;
 
 	if (conf) {
 		axeCore.configure(conf);
@@ -203,7 +197,8 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 			return reactEl;
 		};
 	}
-	checkAndReport(document.body, timeout);
+
+	return checkAndReport(document.body);
 };
 
 module.exports = reactAxe;
