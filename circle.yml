@@ -3,16 +3,22 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8
+      # the Docker image with Cypress dependencies
+      - image: cypress/base:6
+        environment:
+          # this enables colors in the output
+          TERM: xterm
+    working_directory: ~/app
+    parallelism: 1
     steps:
       - checkout
       - restore_cache:
           keys:
-            - npm-{{ checksum "package-lock.json" }}
-            - npm
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            - v1-npm-deps
       - run: npm install
       - save_cache:
-          key: npm-{{ checksum "package-lock.json" }}
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-      - run: npm test
+      - run: npm run test
