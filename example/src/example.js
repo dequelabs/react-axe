@@ -1,3 +1,4 @@
+import 'webcomponents.js/webcomponents.min.js'
 import React from 'react';
 import ReactDOM from 'react-dom';
 
