@@ -16,12 +16,6 @@ jobs:
           keys:
             - v1-npm-deps-{{ checksum "package-lock.json" }}
             - v1-npm-deps
-      - restore_cache:
-          keys:
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
-            - v1-npm-deps
-            - example-npm-deps-{{ checksum "example/package.json" }}
-            - example-npm-deps
       - run:
           name: Install top-level dependencies
           command: npm install
@@ -32,8 +26,4 @@ jobs:
           key: v1-npm-deps-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-      - save_cache:
-          key: example-npm-deps-{{ checksum "package-lock.json" }}
-          paths:
-            - example/node_modules
       - run: npm run test
