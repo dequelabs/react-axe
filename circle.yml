@@ -16,6 +16,10 @@ jobs:
           keys:
             - v1-npm-deps-{{ checksum "package-lock.json" }}
             - v1-npm-deps
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            - v1-npm-deps
             - example-npm-deps-{{ checksum "example/package.json" }}
             - example-npm-deps
       - run:
