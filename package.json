@@ -9,7 +9,7 @@
     "test": "eslint index.js && cypress run",
     "test:debug": "cypress open"
   },
-  "keywords": [
+  "keywords": [ 
     "accessibility",
     "a11y",
     "lint",
