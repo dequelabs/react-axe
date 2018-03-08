@@ -19,9 +19,9 @@ jobs:
       - run:
           name: Install top-level dependencies
           command: npm install
-    - run:
-        name: Install example dependencies
-        command: cd example && npm install
+      - run:
+          name: Install example dependencies
+          command: cd example && npm install
       - save_cache:
           key: v1-npm-deps-{{ checksum "package-lock.json" }}
           paths:
