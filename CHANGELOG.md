@@ -1,3 +1,13 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/dequelabs/react-axe/compare/v3.0.0-alpha.1...v3.0.0) (2018-03-28)
+
+
+### Features
+
+* Update to [axe-core 3.0.0](https://github.com/dequelabs/axe-core/releases/tag/v3.0.0)
+* Simplified the example by removing Grunt ([#30](https://github.com/dequelabs/react-axe/issues/30)) ([311d2e5](https://github.com/dequelabs/react-axe/commit/311d2e5))
+
+
 <a name="3.0.0-alpha.1"></a>
 # [3.0.0-alpha.1](https://github.com/dequelabs/react-axe/compare/v2.1.9...v3.0.0-alpha.1) (2018-02-20)
 
