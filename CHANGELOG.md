@@ -1,3 +1,11 @@
+<a name="3.0.1"></a>
+# [3.0.1](https://github.com/dequelabs/react-axe/compare/v3.0.0...v3.0.1) (2018-04-05)
+
+### Bug Fixes
+
+* Use a semaphore to avoid running axe concurrently ([#33](https://github.com/dequelabs/react-axe/pull/33)) ([151c906](https://github.com/dequelabs/react-axe/commit/151c9063e62adf8025334b6d507da9f17958c181))g
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/dequelabs/react-axe/compare/v3.0.0-alpha.1...v3.0.0) (2018-03-28)
 
@@ -26,4 +34,3 @@
 ### Features
 
 * Update to [axe-core 2.6.0](https://github.com/dequelabs/axe-core/releases/tag/v2.6.0)
-
