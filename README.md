@@ -1,5 +1,7 @@
 # Usage
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/dequelabs/react-axe.svg)](https://greenkeeper.io/)
+
 Install the module from NPM or elsewhere
 
 ```sh
