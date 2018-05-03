@@ -38,9 +38,9 @@
     "axe-core": "^3.0.0"
   },
   "devDependencies": {
-    "cypress": "^1.4.1",
+    "cypress": "^2.1.0",
     "eslint": "^4.13.1",
-    "http-server": "^0.10.0",
+    "http-server": "^0.11.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "eslint-config-airbnb": "^16.1.0",
