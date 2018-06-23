@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "cypress": "^3.0.0",
-    "eslint": "^4.13.1",
+    "eslint": "^5.0.0",
     "http-server": "^0.11.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
