@@ -38,7 +38,7 @@
     "axe-core": "^3.0.0"
   },
   "devDependencies": {
-    "cypress": "^2.1.0",
+    "cypress": "^3.0.2",
     "eslint": "^5.0.0",
     "http-server": "^0.11.1",
     "react": "^16.2.0",
