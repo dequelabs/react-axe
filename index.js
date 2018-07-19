@@ -188,7 +188,7 @@ function componentAfterRender(component) {
 function addComponent(component) {
   var reactInstance = component._reactInternalInstance;
 	if (reactInstance && !components[reactInstance._debugID]) {
-		components[component._reactInternalInstance._debugID] = component;
+		components[reactInstance._debugID] = component;
 		componentAfterRender(component);
 	}
 }
