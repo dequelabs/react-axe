@@ -7,7 +7,8 @@
     "eslint": "eslint *.js",
     "pretest": "cd example && npm run start &",
     "test": "eslint index.js && cypress run",
-    "test:debug": "cypress open"
+    "test:debug": "cypress open",
+    "posttest": "cd example && npm run stop"
   },
   "keywords": [
     "accessibility",
