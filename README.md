@@ -1,4 +1,8 @@
-# Usage
+# React-axe
+
+Test your React application with the [axe-core](https://github.com/dequelabs/axe-core) accessibility testing library. Results will show in the Chrome DevTools console.
+
+## Usage
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/dequelabs/react-axe.svg)](https://greenkeeper.io/)
 
