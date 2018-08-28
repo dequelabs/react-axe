@@ -46,7 +46,7 @@ function getCommonParent(nodes) {
 			});
 		}
 	}
-	return path ? path[path.length - 1] : document;
+	return path[path.length - 1];
 }
 
 function logElement(node, logFn) {
@@ -186,9 +186,8 @@ function componentAfterRender(component) {
 }
 
 function addComponent(component) {
-	var reactInstance = component._reactInternalInstance;
-	if (reactInstance && !components[reactInstance._debugID]) {
-		components[reactInstance._debugID] = component;
+	if (component._reactInternalInstance) {
+		components[component._reactInternalInstance._debugID] = component;
 		componentAfterRender(component);
 	}
 }
