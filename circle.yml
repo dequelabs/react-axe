@@ -11,6 +11,8 @@ restore_dependency_cache: &restore_dependency_cache
     keys:
       - v1-npm-cache-{{ checksum "package-lock.json" }}
       - v1-npm-cache-
+  restore_cache:
+    keys:
       - v1-npm-example-cache-{{ checksum "example/package.json" }}
       - v1-npm-example-cache-
 
