@@ -1,29 +1,69 @@
 version: 2
 
+defaults: &defaults
+  docker:
+    # Use a Docker image with Cypress already installed.
+    - image: cypress/base:6
+  working_directory: ~/react-axe
+
+restore_dependency_cache: &restore_dependency_cache
+  restore_cache:
+    keys:
+      - v1-npm-cache-{{ checksum "package-lock.json" }}
+      - v1-npm-cache-
+      - v1-npm-example-cache-{{ checksum "example/package-lock.json" }}
+      - v1-npm-example-cache-
+
+set_npm_auth: &set_npm_auth
+  run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+
 jobs:
-  build:
-    docker:
-      # the Docker image with Cypress dependencies
-      - image: cypress/base:6
-        environment:
-          # this enables colors in the output
-          TERM: xterm
-    working_directory: ~/app
-    parallelism: 1
+  # Fetch and cache dependencies.
+  dependencies:
+    <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
-            - v1-npm-deps
-      - run:
-          name: Install top-level dependencies
-          command: npm install
-      - run:
-          name: Install example dependencies
-          command: cd example && npm install
+      - <<: *set_npm_auth
+      - <<: *restore_dependency_cache
+      - run: npm install
       - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v1-npm-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
+      # Install example dependencies; they're used in tests.
+      - run: npm install --prefix example
+
+  # Run the test suite.
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *restore_dependency_cache
       - run: npm run test
+
+  # Release a new version.
+  production_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - <<: *set_npm_auth
+      - <<: *restore_dependency_cache
+      - run: npm publish
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - dependencies
+      # Run tests on all commits, but after installing dependencies.
+      - test:
+          requires:
+            - dependencies
+      # Run a production release on "master" commits, but only after the tests pass and dependencies are installed.
+      - production_release:
+          requires:
+            - dependencies
+            - test
+          filters:
+            branches:
+              only: master
