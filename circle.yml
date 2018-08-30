@@ -6,52 +6,34 @@ defaults: &defaults
     - image: cypress/base:6
   working_directory: ~/react-axe
 
-restore_dependency_cache: &restore_dependency_cache
-  restore_cache:
-    keys:
-      - v1-npm-cache-{{ checksum "package-lock.json" }}
-      - v1-npm-cache-
-
-restore_example_dependency_cache: &restore_example_dependency_cache
-  restore_cache:
-    keys:
-      - v1-npm-example-cache-{{ checksum "example/package.json" }}
-      - v1-npm-example-cache-
-
-set_npm_auth: &set_npm_auth
-  run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
-
 jobs:
   # Fetch and cache dependencies.
   dependencies:
     <<: *defaults
     steps:
       - checkout
-      - <<: *set_npm_auth
-      - <<: *restore_dependency_cache
-      - <<: *restore_example_dependency_cache
+      - restore_cache:
+          keys:
+            - v1-cache-{{ checksum "package-lock.json" }}
       # Install package dependencies.
       - run: npm install
-      - save_cache:
-          key: v1-npm-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-            # Cypress cache
-            - ~/.cache
       # Install example dependencies; they're used in tests.
       - run: npm install --prefix example
       - save_cache:
-          key: v1-npm-example-cache-{{ checksum "example/package.json" }}
+          key: v1-cache-{{ checksum "package-lock.json" }}
           paths:
+            - node_modules
             - example/node_modules
+            - ~/.cache
 
   # Run the test suite.
   test:
     <<: *defaults
     steps:
       - checkout
-      - <<: *restore_dependency_cache
-      - <<: *restore_example_dependency_cache
+      - restore_cache:
+          keys:
+            - v1-cache-{{ checksum "package-lock.json" }}
       - run: npm run test
 
   # Release a new version.
@@ -59,8 +41,10 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - <<: *set_npm_auth
-      - <<: *restore_dependency_cache
+      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+      - restore_cache:
+          keys:
+            - v1-cache-{{ checksum "package-lock.json" }}
       - run: npm publish
 
 workflows:
