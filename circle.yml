@@ -11,6 +11,8 @@ restore_dependency_cache: &restore_dependency_cache
     keys:
       - v1-npm-cache-{{ checksum "package-lock.json" }}
       - v1-npm-cache-
+
+restore_example_dependency_cache: &restore_example_dependency_cache
   restore_cache:
     keys:
       - v1-npm-example-cache-{{ checksum "example/package.json" }}
@@ -27,6 +29,7 @@ jobs:
       - checkout
       - <<: *set_npm_auth
       - <<: *restore_dependency_cache
+      - <<: *restore_example_dependency_cache
       - run: npm install
       - save_cache:
           key: v1-npm-cache-{{ checksum "package-lock.json" }}
@@ -45,6 +48,7 @@ jobs:
     steps:
       - checkout
       - <<: *restore_dependency_cache
+      - <<: *restore_example_dependency_cache
       - run: npm run test
 
   # Release a new version.
