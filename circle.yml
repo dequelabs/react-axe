@@ -30,6 +30,7 @@ jobs:
       - <<: *set_npm_auth
       - <<: *restore_dependency_cache
       - <<: *restore_example_dependency_cache
+      # Install package dependencies.
       - run: npm install
       - save_cache:
           key: v1-npm-cache-{{ checksum "package-lock.json" }}
@@ -40,7 +41,7 @@ jobs:
       # Install example dependencies; they're used in tests.
       - run: npm install --prefix example
       - save_cache:
-          key: v1-npm-cache-{{ checksum "example/package.json" }}
+          key: v1-npm-example-cache-{{ checksum "example/package.json" }}
           paths:
             - example/node_modules
 
