@@ -35,6 +35,8 @@ jobs:
           key: v1-npm-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
+            # Cypress cache
+            - ~/.cache
       # Install example dependencies; they're used in tests.
       - run: npm install --prefix example
       - save_cache:
