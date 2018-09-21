@@ -1,4 +1,10 @@
-# Usage
+# React-axe
+
+Test your React application with the [axe-core](https://github.com/dequelabs/axe-core) accessibility testing library. Results will show in the Chrome DevTools console.
+
+## Usage
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/dequelabs/react-axe.svg)](https://greenkeeper.io/)
 
 Install the module from NPM or elsewhere
 
@@ -16,7 +22,7 @@ var ReactDOM = require('react-dom');
 
 if (process.env.NODE_ENV !== 'production') {
   var axe = require('react-axe');
-  axe(React, ReactDOM);
+  axe(React, ReactDOM, 1000);
 }
 ```
 
@@ -27,6 +33,10 @@ Once initialized, the module will output accessibility defect information to the
 ## Deduplicating
 
 react-axe will deduplicate violations using the rule that raised the violation and the CSS selector and the failureSummary of the specific node. This will ensure that each unique issue will only be printed to the console once.
+
+## Debouncing
+
+The third argument to the exported function is the number of milliseconds to wait for component updates to cease before performing an analysis of all the changes. The changes will be batched and analyzed from the closest common ancestor of all the components that changed within the batch. This generally leads to the first analysis for a dynamic application, analyzing the entire page (which is what you want), while subsequent updates will only analyze a portion of the page (which is probably also what you want).
 
 ## Shadow DOM
 
@@ -46,7 +56,7 @@ var config = {
   ]
 };
 
-axe(React, ReactDOM, config);
+axe(React, ReactDOM, 1000, config);
 ```
 
 ## Run the example
