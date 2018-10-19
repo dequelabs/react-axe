@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   docker:
     # Use a Docker image with Cypress already installed.
-    - image: cypress/base:6
+    - image: cypress/base:10
   working_directory: ~/react-axe
 
 jobs:
@@ -15,7 +15,6 @@ jobs:
       - restore_cache:
           keys:
             - v2-cache-{{ checksum "package-lock.json" }}
-      - run: npm install -g npm@latest
       # Install package dependencies.
       - run: npm install
       # Install example dependencies; they're used in tests.
@@ -42,7 +41,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: npm install -g npm@latest
       - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
       - restore_cache:
           keys:
