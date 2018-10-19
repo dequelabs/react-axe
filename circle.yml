@@ -15,6 +15,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-cache-{{ checksum "package-lock.json" }}
+      - run: sudo npm install -g npm@latest
       # Install package dependencies.
       - run: npm install
       # Install example dependencies; they're used in tests.
@@ -41,6 +42,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: sudo npm install -g npm@latest
       - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
       - restore_cache:
           keys:
