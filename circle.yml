@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   docker:
     # Use a Docker image with Cypress already installed.
-    - image: cypress/base:6
+    - image: cypress/base:10
   working_directory: ~/react-axe
 
 jobs:
@@ -14,17 +14,24 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-cache-{{ checksum "package-lock.json" }}
+            - v2-cache-{{ checksum "package-lock.json" }
+      - restore_cache:
+          keys:
+            - v2-example-cache-{{ checksum "example/package.json" }}
       # Install package dependencies.
       - run: npm install
       # Install example dependencies; they're used in tests.
       - run: npm install --prefix example
       - save_cache:
-          key: v1-cache-{{ checksum "package-lock.json" }}
+          key: v2-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
             - example/node_modules
             - ~/.cache
+      - save_cache:
+          key: v2-cache-example-{{ checksum "package-lock.json" }}
+          paths:
+            - example/node_modules
 
   # Run the test suite.
   test:
@@ -33,7 +40,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-cache-{{ checksum "package-lock.json" }}
+            - v2-cache-{{ checksum "package-lock.json" }}
+      - restore_cache:
+          keys:
+            - v2-cache-example-{{ checksum "package-lock.json" }}
       - run: npm run test
 
   # Release a new version.
@@ -44,7 +54,7 @@ jobs:
       - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
       - restore_cache:
           keys:
-            - v1-cache-{{ checksum "package-lock.json" }}
+            - v2-cache-{{ checksum "package-lock.json" }}
       - run: npm publish
 
 workflows:
