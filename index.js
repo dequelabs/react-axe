@@ -226,7 +226,7 @@ var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf) {
 		};
 	}
 
-	return checkAndReport(document.body, timeout);
+	return checkAndReport(document, timeout);
 };
 
 module.exports = reactAxe;
