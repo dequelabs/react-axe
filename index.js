@@ -11,12 +11,15 @@ var moderate = 'color:orange;font-weight:bold;';
 var minor = 'color:orange;font-weight:normal;';
 var defaultReset = 'font-color:black;font-weight:normal;';
 
-var timer;
+var handler;
 var timeout;
 var _createElement;
 var components = {};
 var nodes = [];
 var cache = {};
+
+var scheduleFunction = requestIdleCallback || setTimeout;
+var cancelScheduledFunction = cancelIdleCallback || clearTimeout;
 
 function getPath(node) {
 	var path = [];
@@ -98,7 +101,7 @@ function createDeferred () {
 	var deferred = {};
 
 	deferred.promise = new Promise(function (resolve, reject) {
-		deferred.resolve= resolve
+		deferred.resolve = resolve
 		deferred.reject = reject
 	})
 
@@ -106,15 +109,16 @@ function createDeferred () {
 }
 
 function checkAndReport(node, timeout) {
-	if (timer) {
-		clearTimeout(timer);
-		timer = undefined;
+	if (handler) {
+		cancelScheduledFunction(handler);
+		handler= undefined;
 	}
 
 	var deferred = createDeferred()
+  var scheduleOptions = scheduleFunction === requestIdleCallback ? { timeout: timeout } : timeout;
 
 	nodes.push(node);
-	timer = setTimeout(function () {
+	handler = scheduleFunction(function () {
 		var n = getCommonParent(nodes);
 		if (n.nodeName.toLowerCase() === 'html') {
 			// if the only common parent is the body, then analyze the whole page
@@ -167,7 +171,7 @@ function checkAndReport(node, timeout) {
 
 			deferred.resolve()
 		});
-	}, timeout);
+	}, scheduleOptions);
 
 	return deferred.promise;
 }
