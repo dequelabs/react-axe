@@ -40,13 +40,13 @@
   "devDependencies": {
     "cypress": "^3.0.3",
     "eslint": "^5.0.0",
-    "http-server": "^0.11.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1"
+    "eslint-plugin-react": "^7.5.1",
+    "http-server": "^0.11.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "repository": {
     "type": "git",
