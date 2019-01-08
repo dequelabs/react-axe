@@ -1,6 +1,11 @@
 /* global document, window, Promise */
 var axeCore = require('axe-core');
+var rIC = require('requestidlecallback')
 var after = require('./after');
+
+var requestIdleCallback = rIC.request;
+var cancelIdleCallback = rIC.cancel;
+
 var React = undefined;
 var ReactDOM = undefined;
 
@@ -11,7 +16,7 @@ var moderate = 'color:orange;font-weight:bold;';
 var minor = 'color:orange;font-weight:normal;';
 var defaultReset = 'font-color:black;font-weight:normal;';
 
-var timer;
+var idleId;
 var timeout;
 var _createElement;
 var components = {};
@@ -106,15 +111,15 @@ function createDeferred () {
 }
 
 function checkAndReport(node, timeout) {
-	if (timer) {
-		clearTimeout(timer);
-		timer = undefined;
+	if (idleId) {
+		cancelIdleCallback(idleId);
+		idleId = undefined;
 	}
 
 	var deferred = createDeferred()
 
 	nodes.push(node);
-	timer = setTimeout(function () {
+	idleId = requestIdleCallback(function () {
 		var n = getCommonParent(nodes);
 		if (n.nodeName.toLowerCase() === 'html') {
 			// if the only common parent is the body, then analyze the whole page
@@ -167,7 +172,7 @@ function checkAndReport(node, timeout) {
 
 			deferred.resolve()
 		});
-	}, timeout);
+	}, { timeout: timeout });
 
 	return deferred.promise;
 }
