@@ -7,7 +7,8 @@
     "eslint": "eslint *.js",
     "pretest": "cd example && npm run start &",
     "test": "eslint index.js && cypress run",
-    "test:debug": "cypress open"
+    "test:debug": "cypress open",
+    "fmt": "prettier --write *.{js,json,md} example/*.json example/src/*.{js,css} cypress/**/*.{js,json}"
   },
   "keywords": [
     "accessibility",
@@ -45,11 +46,33 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "http-server": "^0.11.1",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/dequelabs/react-axe"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "useTabs": false
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
