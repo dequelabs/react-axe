@@ -1,6 +1,11 @@
 /* global document, window, Promise */
 var axeCore = require('axe-core');
+var rIC = require('requestidlecallback');
 var after = require('./after');
+
+var requestIdleCallback = rIC.request;
+var cancelIdleCallback = rIC.cancel;
+
 var React = undefined;
 var ReactDOM = undefined;
 
@@ -11,7 +16,7 @@ var moderate = 'color:orange;font-weight:bold;';
 var minor = 'color:orange;font-weight:normal;';
 var defaultReset = 'font-color:black;font-weight:normal;';
 
-var timer;
+var idleId;
 var timeout;
 var _createElement;
 var components = {};
@@ -108,75 +113,78 @@ function createDeferred() {
 }
 
 function checkAndReport(node, timeout) {
-  if (timer) {
-    clearTimeout(timer);
-    timer = undefined;
+  if (idleId) {
+    cancelIdleCallback(idleId);
+    idleId = undefined;
   }
 
   var deferred = createDeferred();
 
   nodes.push(node);
-  timer = setTimeout(function() {
-    var n = getCommonParent(nodes);
-    if (n.nodeName.toLowerCase() === 'html') {
-      // if the only common parent is the body, then analyze the whole page
-      n = document;
-    }
-    axeCore.run(n, { reporter: 'v2' }, function(error, results) {
-      if (error) {
-        return deferred.reject(error);
+  idleId = requestIdleCallback(
+    function() {
+      var n = getCommonParent(nodes);
+      if (n.nodeName.toLowerCase() === 'html') {
+        // if the only common parent is the body, then analyze the whole page
+        n = document;
       }
+      axeCore.run(n, { reporter: 'v2' }, function(error, results) {
+        if (error) {
+          return deferred.reject(error);
+        }
 
-      results.violations = results.violations.filter(function(result) {
-        result.nodes = result.nodes.filter(function(node) {
-          var key = node.target.toString() + result.id;
-          var retVal = !cache[key];
-          cache[key] = key;
-          return retVal;
+        results.violations = results.violations.filter(function(result) {
+          result.nodes = result.nodes.filter(function(node) {
+            var key = node.target.toString() + result.id;
+            var retVal = !cache[key];
+            cache[key] = key;
+            return retVal;
+          });
+          return !!result.nodes.length;
         });
-        return !!result.nodes.length;
-      });
-      if (results.violations.length) {
-        console.group('%cNew aXe issues', serious);
-        results.violations.forEach(function(result) {
-          var fmt;
-          switch (result.impact) {
-            case 'critical':
-              fmt = critical;
-              break;
-            case 'serious':
-              fmt = serious;
-              break;
-            case 'moderate':
-              fmt = moderate;
-              break;
-            case 'minor':
-              fmt = minor;
-              break;
-            default:
-              fmt = minor;
-              break;
-          }
-          console.groupCollapsed(
-            '%c%s: %c%s %s',
-            fmt,
-            result.impact,
-            defaultReset,
-            result.help,
-            result.helpUrl
-          );
-          result.nodes.forEach(function(node) {
-            failureSummary(node, 'any');
-            failureSummary(node, 'none');
+        if (results.violations.length) {
+          console.group('%cNew aXe issues', serious);
+          results.violations.forEach(function(result) {
+            var fmt;
+            switch (result.impact) {
+              case 'critical':
+                fmt = critical;
+                break;
+              case 'serious':
+                fmt = serious;
+                break;
+              case 'moderate':
+                fmt = moderate;
+                break;
+              case 'minor':
+                fmt = minor;
+                break;
+              default:
+                fmt = minor;
+                break;
+            }
+            console.groupCollapsed(
+              '%c%s: %c%s %s',
+              fmt,
+              result.impact,
+              defaultReset,
+              result.help,
+              result.helpUrl
+            );
+            result.nodes.forEach(function(node) {
+              failureSummary(node, 'any');
+              failureSummary(node, 'none');
+            });
+            console.groupEnd();
           });
           console.groupEnd();
-        });
-        console.groupEnd();
-      }
+        }
 
-      deferred.resolve();
-    });
-  }, timeout);
+        deferred.resolve();
+      });
+    },
+    { timeout: timeout }
+  );
 
   return deferred.promise;
 }
