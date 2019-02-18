@@ -203,9 +203,19 @@ function componentAfterRender(component) {
 }
 
 function addComponent(component) {
-  var reactInstance = component._reactInternalInstance;
-  if (reactInstance && !components[reactInstance._debugID]) {
-    components[reactInstance._debugID] = component;
+  var reactInstance = component._reactInternalInstance || {};
+  var reactInstanceDebugID = reactInstance._debugID;
+  var reactFiberInstance = component._reactInternalFiber || {};
+  var reactFiberInstanceDebugID = reactFiberInstance._debugID;
+
+  if (reactInstanceDebugID && !components[reactInstanceDebugID]) {
+    components[reactInstanceDebugID] = component;
+    componentAfterRender(component);
+  } else if (
+    reactFiberInstanceDebugID &&
+    !components[reactFiberInstanceDebugID]
+  ) {
+    components[reactFiberInstanceDebugID] = component;
     componentAfterRender(component);
   }
 }
