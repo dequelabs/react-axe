@@ -1,3 +1,17 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+# [3.1.0](https://github.com/dequelabs/react-axe/compare/v3.0.1...v3.1.0) (2019-03-11)
+
+### Bug Fixes
+
+- look for debug id under the fibre if not in the internal instance ([#65](https://github.com/dequelabs/react-axe/issues/65)) ([e246a24](https://github.com/dequelabs/react-axe/commit/e246a24))
+
+### Features
+
+- use `requestIdleCallback` when possible ([#61](https://github.com/dequelabs/react-axe/issues/61)) ([a9bff13](https://github.com/dequelabs/react-axe/commit/a9bff13)), closes [#59](https://github.com/dequelabs/react-axe/issues/59) [#59](https://github.com/dequelabs/react-axe/issues/59)
+
 <a name="3.0.2"></a>
 
 ## [3.0.2](https://github.com/dequelabs/react-axe/compare/v3.0.1...v3.0.2) (2018-09-17)
