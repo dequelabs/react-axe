@@ -8,8 +8,8 @@
 #services p {
   display: block;
   padding: 15px 20px;
-  background-color: #F8F8F8;
-  color: #7B8585;
+  background-color: #f8f8f8;
+  color: #7b8585;
   margin-bottom: 3px;
   position: relative;
   cursor: pointer;
@@ -27,12 +27,12 @@
 }
 
 #services p:hover {
-  background-color:#d8f2f1;
+  background-color: #d8f2f1;
 }
 
 #services p.active {
-  color:#fff;
-  background-color:#41c7c2;
+  color: #fff;
+  background-color: #41c7c2;
 }
 
 #services p.active b {

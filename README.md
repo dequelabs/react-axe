@@ -50,7 +50,7 @@ There is a fourth optional argument that is a configuration object for axe-core.
 var config = {
   rules: [
     {
-      id: "skip-link",
+      id: 'skip-link',
       enabled: true
     }
   ]
@@ -73,6 +73,7 @@ npm start
 ## Run the tests
 
 Install dependencies in the example app and then run Cypress in the root directory of react-axe.
+
 ```
 cd example
 npm install
@@ -82,11 +83,13 @@ npm test
 ```
 
 Once you’ve installed everything at least once, you can just run the tests:
+
 ```
 npm test
 ```
 
 To debug tests in the Cypress application:
+
 ```
 npm run test:debug
 ```

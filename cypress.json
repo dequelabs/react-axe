@@ -1,6 +1,6 @@
 {
-	"fileServerFolder": "example",
-	"pluginsFile": false,
-	"supportFile": false,
-	"video": false
+  "fileServerFolder": "example",
+  "pluginsFile": false,
+  "supportFile": false,
+  "video": false
 }
