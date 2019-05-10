@@ -24,7 +24,7 @@ var nodes = [];
 var cache = {};
 
 function getPath(node) {
-  var path = [];
+  var path = [node];
   do {
     path.push(node.parentNode);
     node = node.parentNode;
