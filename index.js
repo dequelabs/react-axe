@@ -20,15 +20,15 @@ var idleId;
 var timeout;
 var _createElement;
 var components = {};
-var nodes = [];
+var nodes = [document.documentElement];
 var cache = {};
 
 function getPath(node) {
   var path = [node];
-  do {
+  while (node && node.nodeName.toLowerCase() !== 'html') {
     path.push(node.parentNode);
     node = node.parentNode;
-  } while (node && node.nodeName.toLowerCase() !== 'html');
+  }
   if (!node || !node.parentNode) {
     return null;
   }
