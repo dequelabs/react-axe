@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 ```
 
-Be sure to only run the module in your development environment (as shown in the code above) or else your application will use more resources than necessary when in production. You can use [envify](https://www.npmjs.com/package/envify) to do this as is shown in the [example](./example/Gruntfile.js#L25).
+Be sure to only run the module in your development environment (as shown in the code above) or else your application will use more resources than necessary when in production. You can use [envify](https://www.npmjs.com/package/envify) to do this as is shown in the [example](./example/package.json#L35).
 
 Once initialized, the module will output accessibility defect information to the Chrome Devtools console every time a component updates.
 
