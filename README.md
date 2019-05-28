@@ -64,6 +64,7 @@ axe(React, ReactDOM, 1000, config);
 Run a build in the example directory and start a server to see React-aXe in action in the Chrome Devtools console (opens on localhost:8888):
 
 ```sh
+npm install
 cd example
 npm install
 npm install -g http-server
