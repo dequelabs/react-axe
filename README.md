@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 ```
 
-Be sure to only run the module in your development environment (as shown in the code above) or else your application will use more resources than necessary when in production. You can use [envify](https://www.npmjs.com/package/envify) to do this as is shown in the [example](./example/Gruntfile.js#L25).
+Be sure to only run the module in your development environment (as shown in the code above) or else your application will use more resources than necessary when in production. You can use [envify](https://www.npmjs.com/package/envify) to do this as is shown in the [example](./example/package.json#L35).
 
 Once initialized, the module will output accessibility defect information to the Chrome Devtools console every time a component updates.
 
@@ -64,6 +64,7 @@ axe(React, ReactDOM, 1000, config);
 Run a build in the example directory and start a server to see React-aXe in action in the Chrome Devtools console (opens on localhost:8888):
 
 ```sh
+npm install
 cd example
 npm install
 npm install -g http-server
