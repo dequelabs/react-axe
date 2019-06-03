@@ -190,7 +190,20 @@ function checkAndReport(node, timeout) {
 }
 
 function checkNode(component) {
-  var node = ReactDOM.findDOMNode(component);
+  var node = null;
+
+  try {
+    node = ReactDOM.findDOMNode(component);
+  } catch (e) {
+    console.group('%caXe error: could not check node', critical);
+    console.group('%cComponent', serious);
+    console.log(component);
+    console.groupEnd();
+    console.group('%cError', serious);
+    console.log(e);
+    console.groupEnd();
+    console.groupEnd();
+  }
 
   if (node) {
     checkAndReport(node, timeout);
