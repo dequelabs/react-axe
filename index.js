@@ -197,10 +197,10 @@ function checkNode(component) {
   } catch (e) {
     console.group('%caXe error: could not check node', critical);
     console.group('%cComponent', serious);
-    console.log(component);
+    console.error(component);
     console.groupEnd();
     console.group('%cError', serious);
-    console.log(e);
+    console.error(e);
     console.groupEnd();
     console.groupEnd();
   }
