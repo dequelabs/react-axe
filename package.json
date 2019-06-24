@@ -43,7 +43,7 @@
     "cypress": "^3.0.3",
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "http-server": "^0.11.1",
