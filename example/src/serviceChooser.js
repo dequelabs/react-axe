@@ -28,7 +28,7 @@ module.exports = createReactClass({
       );
     });
     return (
-      <ShadowDOM>
+      <ShadowDOM.div>
         <service-chooser>
           <div id="services">
             {services}
@@ -38,7 +38,7 @@ module.exports = createReactClass({
           </div>
           <style type="text/css">{styles}</style>
         </service-chooser>
-      </ShadowDOM>
+      </ShadowDOM.div>
     );
   }
 });
