@@ -38,26 +38,20 @@ describe('React-axe', function() {
     });
   });
 
-  it('should run axe inside of Shadow DOM', function() {
-    cy.visit('http://localhost:8080').then(function(win) {
-      const groupCollapsed = cy.spy(win.console, 'groupCollapsed');
-      const colorMessage = 'Elements must have sufficient color contrast';
+  it('should run axe inside of Shadow DOM', async function() {
+    const win = await cy.visit('http://localhost:8080');
+    const groupCollapsed = cy.spy(win.console, 'groupCollapsed');
+    const colorMessage = 'Elements must have sufficient color contrast';
 
-      let serviceChooser;
-      cy.get('service-chooser')
-        .first()
-        .then(function(node) {
-          serviceChooser = node[0];
-        });
+    const node = await cy.get('service-chooser').first();
+    const serviceChooser = node[0];
 
-      axe(React, ReactDOM, 0).then(function() {
-        expect(filterLogs(groupCollapsed.args, colorMessage)).to.equal(
-          colorMessage
-        );
-        expect(filterLogs(groupCollapsed.args, serviceChooser)).to.equal(
-          serviceChooser
-        );
-      });
-    });
+    await axe(React, ReactDOM, 0);
+    expect(filterLogs(groupCollapsed.args, colorMessage)).to.equal(
+      colorMessage
+    );
+    expect(filterLogs(groupCollapsed.args, serviceChooser)).to.equal(
+      serviceChooser
+    );
   });
 });
