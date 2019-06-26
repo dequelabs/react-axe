@@ -44,8 +44,9 @@ describe('React-axe', function() {
       const colorMessage = 'Elements must have sufficient color contrast';
 
       let serviceChooser;
-      cy.get('service-chooser')
-        .first()
+      cy.document()
+        .shadowGet('#service-chooser')
+        .shadowFirst()
         .then(function(node) {
           serviceChooser = node[0];
         });

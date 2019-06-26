@@ -14,8 +14,8 @@
   "dependencies": {
     "axe-core": "^3.0.0-beta.1",
     "create-react-class": "^15.6.3",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-shadow": "^17.0.0",
     "webcomponents.js": "^0.7.24"
   },

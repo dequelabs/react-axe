@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "cypress": "^3.0.3",
+    "cypress-shadow-dom": "^0.1.0",
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.8.0",
@@ -50,8 +51,8 @@
     "husky": "^2.0.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "repository": {
     "type": "git",
