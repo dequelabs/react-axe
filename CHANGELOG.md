@@ -1,6 +1,21 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.2.0](https://github.com/dequelabs/react-axe/compare/v3.0.1...v3.2.0) (2019-06-26)
+
+### Bug Fixes
+
+- addComponent was getting called for the same component multiple times causing after.js to get stuck in an infinite loop ([d5901f3](https://github.com/dequelabs/react-axe/commit/d5901f3))
+- catch and log errors thrown when calling React.findDOMNode ([#82](https://github.com/dequelabs/react-axe/issues/82)) ([14eeec6](https://github.com/dequelabs/react-axe/commit/14eeec6))
+- include node tested to its path when determining commonParent ([31e13e4](https://github.com/dequelabs/react-axe/commit/31e13e4))
+- look for debug id under the fibre if not in the internal instance ([#65](https://github.com/dequelabs/react-axe/issues/65)) ([e246a24](https://github.com/dequelabs/react-axe/commit/e246a24))
+- use reactInstance variable when possible ([eafb2e3](https://github.com/dequelabs/react-axe/commit/eafb2e3))
+- **package:** update react-shadow to version 17.0.0 ([#83](https://github.com/dequelabs/react-axe/issues/83)) ([98b3cb9](https://github.com/dequelabs/react-axe/commit/98b3cb9))
+
+### Features
+
+- use `requestIdleCallback` when possible ([#61](https://github.com/dequelabs/react-axe/issues/61)) ([a9bff13](https://github.com/dequelabs/react-axe/commit/a9bff13)), closes [#59](https://github.com/dequelabs/react-axe/issues/59) [#59](https://github.com/dequelabs/react-axe/issues/59)
 
 # [3.1.0](https://github.com/dequelabs/react-axe/compare/v3.0.1...v3.1.0) (2019-03-11)
 
