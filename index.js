@@ -1,4 +1,4 @@
-/* global document, window, Promise */
+/* global Promise */
 var axeCore = require('axe-core');
 var rIC = require('requestidlecallback');
 var after = require('./after');
