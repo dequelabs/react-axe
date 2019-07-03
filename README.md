@@ -108,4 +108,4 @@ The main difference is that react-axe tests the accessibility of the rendered DO
 1. False negatives because of lacking information. Example is in order to test color contrast you must know the foreground and background colors, and
 1. False positives because the element being evaluated is not in its final state and the information to communicate this to the testing algorithm is not available. Example is an inert piece of code that will be augmented once it becomes active.
 
-If you have nice clean code, number 2 will be negligent but number 1 will always be a concern.
+If you have nice clean code, number 2 will be negligible but number 1 will always be a concern.
