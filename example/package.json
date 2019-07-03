@@ -14,9 +14,9 @@
   "dependencies": {
     "axe-core": "^3.0.0-beta.1",
     "create-react-class": "^15.6.3",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-shadow": "^16.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-shadow": "^17.0.0",
     "webcomponents.js": "^0.7.24"
   },
   "devDependencies": {
@@ -25,7 +25,7 @@
     "babel-preset-react": "^6.5.0",
     "babelify": "^8.0.0",
     "browserify": "^16.1.1",
-    "browserify-css": "^0.14.0",
+    "browserify-css": "^0.15.0",
     "envify": "^4.1.0",
     "http-server": "^0.11.1"
   },

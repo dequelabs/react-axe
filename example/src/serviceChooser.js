@@ -28,17 +28,15 @@ module.exports = createReactClass({
       );
     });
     return (
-      <ShadowDOM>
-        <service-chooser>
-          <div id="services">
-            {services}
-            <p id="total">
-              Total <b>${this.state.total.toFixed(2)}</b>
-            </p>
-          </div>
-          <style type="text/css">{styles}</style>
-        </service-chooser>
-      </ShadowDOM>
+      <ShadowDOM.div id="service-chooser">
+        <div id="services">
+          {services}
+          <p id="total">
+            Total <b>${this.state.total.toFixed(2)}</b>
+          </p>
+        </div>
+        <style type="text/css">{styles}</style>
+      </ShadowDOM.div>
     );
   }
 });

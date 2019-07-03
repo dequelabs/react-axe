@@ -20,15 +20,15 @@ var idleId;
 var timeout;
 var _createElement;
 var components = {};
-var nodes = [];
+var nodes = [document.documentElement];
 var cache = {};
 
 function getPath(node) {
-  var path = [];
-  do {
+  var path = [node];
+  while (node && node.nodeName.toLowerCase() !== 'html') {
     path.push(node.parentNode);
     node = node.parentNode;
-  } while (node && node.nodeName.toLowerCase() !== 'html');
+  }
   if (!node || !node.parentNode) {
     return null;
   }
@@ -190,7 +190,20 @@ function checkAndReport(node, timeout) {
 }
 
 function checkNode(component) {
-  var node = ReactDOM.findDOMNode(component);
+  var node = null;
+
+  try {
+    node = ReactDOM.findDOMNode(component);
+  } catch (e) {
+    console.group('%caXe error: could not check node', critical);
+    console.group('%cComponent', serious);
+    console.error(component);
+    console.groupEnd();
+    console.group('%cError', serious);
+    console.error(e);
+    console.groupEnd();
+    console.groupEnd();
+  }
 
   if (node) {
     checkAndReport(node, timeout);
