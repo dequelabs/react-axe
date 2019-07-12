@@ -4,6 +4,7 @@
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm install --prefix example",
     "eslint": "eslint *.js",
     "pretest": "cd example && npm run start &",
     "test": "eslint index.js && cypress run",
@@ -50,6 +51,7 @@
     "http-server": "^0.11.1",
     "husky": "^3.0.0",
     "lint-staged": "^9.0.0",
+    "pinst": "^1.1.1",
     "prettier": "^1.15.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
