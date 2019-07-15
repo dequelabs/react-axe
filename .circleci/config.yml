@@ -20,8 +20,6 @@ jobs:
             - v2-example-cache-{{ checksum "example/package.json" }}
       # Install package dependencies.
       - run: npm install
-      # Install example dependencies; they're used in tests.
-      - run: npm install --prefix example
       - save_cache:
           key: v2-cache-{{ checksum "package-lock.json" }}
           paths:
