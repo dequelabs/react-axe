@@ -73,19 +73,10 @@ npm start
 
 ## Run the tests
 
-Install dependencies in the example app and then run Cypress in the root directory of react-axe.
+Install dependencies in the root directory (which also installs them in the example directory) and then run the tests:
 
 ```
-cd example
 npm install
-cd ../
-npm install
-npm test
-```
-
-Once you’ve installed everything at least once, you can just run the tests:
-
-```
 npm test
 ```
 
