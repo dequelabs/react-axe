@@ -15,9 +15,6 @@ jobs:
       - restore_cache:
           keys:
             - v2-cache-{{ checksum "package-lock.json" }}
-      - restore_cache:
-          keys:
-            - v2-example-cache-{{ checksum "example/package.json" }}
       # Install package dependencies.
       - run: npm install
       - save_cache:
@@ -26,10 +23,6 @@ jobs:
             - node_modules
             - example/node_modules
             - ~/.cache
-      - save_cache:
-          key: v2-cache-example-{{ checksum "package-lock.json" }}
-          paths:
-            - example/node_modules
 
   # Run the test suite.
   test:
@@ -39,9 +32,6 @@ jobs:
       - restore_cache:
           keys:
             - v2-cache-{{ checksum "package-lock.json" }}
-      - restore_cache:
-          keys:
-            - v2-cache-example-{{ checksum "package-lock.json" }}
       - run: npm run test
 
   # Release a new version.
