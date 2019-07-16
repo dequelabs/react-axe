@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm run build",
     "start": "http-server -u localhost -p 8080",
     "build": "browserify src/example.js --outfile dist/bundle.js"
   },
