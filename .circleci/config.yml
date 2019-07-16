@@ -17,6 +17,7 @@ jobs:
             - v2-cache-{{ checksum "package-lock.json" }}
       # Install package dependencies.
       - run: npm install
+      - run: npm run install:example
       - save_cache:
           key: v2-cache-{{ checksum "package-lock.json" }}
           paths:
