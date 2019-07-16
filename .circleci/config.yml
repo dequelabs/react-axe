@@ -14,7 +14,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-cache-{{ checksum "package-lock.json" }
+            - v2-cache-{{ checksum "package-lock.json" }}
       - restore_cache:
           keys:
             - v2-example-cache-{{ checksum "example/package.json" }}
