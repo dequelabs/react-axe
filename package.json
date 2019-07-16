@@ -4,7 +4,7 @@
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
-    "prepare": "npm install --prefix example",
+    "prepare": "cd example && npm install",
     "eslint": "eslint *.js",
     "test": "eslint index.js && start-server-and-test start-server http://localhost:8080 test:run",
     "start-server": "cd example && npm run start",
