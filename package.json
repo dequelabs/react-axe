@@ -4,10 +4,11 @@
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
-    "prepare": "npm install --prefix example",
+    "prepare": "npm install --prefix example && cd example && npm run build",
     "eslint": "eslint *.js",
-    "pretest": "cd example && npm run start &",
-    "test": "eslint index.js && cypress run",
+    "test": "eslint index.js && start-server-and-test start-server http://localhost:8080 test:run",
+    "start-server": "cd example && npm run start",
+    "test:run": "cypress run",
     "test:debug": "cypress open",
     "fmt": "prettier --write *.{js,json,md} example/*.json example/src/*.{js,css} cypress/**/*.{js,json}"
   },
@@ -53,7 +54,8 @@
     "lint-staged": "^9.0.0",
     "prettier": "^1.15.3",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "start-server-and-test": "^1.9.1"
   },
   "repository": {
     "type": "git",
