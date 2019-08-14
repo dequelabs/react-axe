@@ -210,9 +210,16 @@ function checkNode(component) {
   }
 }
 
+function removeCheckNode(component) {
+  nodes.filter(function(node) {
+    return node !== ReactDOM.findDOMNode(component);
+  });
+}
+
 function componentAfterRender(component) {
   after(component, 'componentDidMount', checkNode);
   after(component, 'componentDidUpdate', checkNode);
+  after(component, 'componentWillUnmount', removeCheckNode);
 }
 
 function addComponent(component) {
