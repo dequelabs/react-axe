@@ -123,7 +123,11 @@ function checkAndReport(node, timeout) {
   nodes.push(node);
   idleId = requestIdleCallback(
     function() {
-      var n = getCommonParent(nodes);
+      var n = getCommonParent(
+        nodes.filter(function(node) {
+          return node.isConnected;
+        })
+      );
       if (n.nodeName.toLowerCase() === 'html') {
         // if the only common parent is the body, then analyze the whole page
         n = document;
@@ -210,16 +214,9 @@ function checkNode(component) {
   }
 }
 
-function removeCheckNode(component) {
-  nodes.filter(function(node) {
-    return node !== ReactDOM.findDOMNode(component);
-  });
-}
-
 function componentAfterRender(component) {
   after(component, 'componentDidMount', checkNode);
   after(component, 'componentDidUpdate', checkNode);
-  after(component, 'componentWillUnmount', removeCheckNode);
 }
 
 function addComponent(component) {
