@@ -1,6 +1,6 @@
 {
   "name": "react-axe",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "start-server": "cd example && npm run start",
     "test:run": "cypress run",
     "test:debug": "cypress open",
-    "fmt": "prettier --write *.{js,json,md} example/*.json example/src/*.{js,css} cypress/**/*.{js,json}"
+    "fmt": "prettier --write *.{js,json,md} example/*.json example/src/*.{js,css} cypress/**/*.{js,json}",
+    "release": "standard-version -a"
   },
   "keywords": [
     "accessibility",
@@ -56,6 +57,7 @@
     "prettier": "^1.18.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "standard-version": "^7.0.0",
     "start-server-and-test": "^1.10.0"
   },
   "repository": {
