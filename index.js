@@ -10,10 +10,10 @@ var React = undefined;
 var ReactDOM = undefined;
 
 var boldCourier = 'font-weight:bold;font-family:Courier;';
-var critical = 'color:red;font-weight:bold;';
-var serious = 'color:red;font-weight:normal;';
-var moderate = 'color:orange;font-weight:bold;';
-var minor = 'color:orange;font-weight:normal;';
+var critical = 'color:#E52715;font-weight:bold;';
+var serious = 'color:#E52715;font-weight:normal;';
+var moderate = 'color:#C65015;font-weight:bold;';
+var minor = 'color:#C65015;font-weight:normal;';
 var defaultReset = 'font-color:black;font-weight:normal;';
 
 var idleId;
