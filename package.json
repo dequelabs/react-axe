@@ -39,24 +39,24 @@
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MPL-2.0",
   "dependencies": {
-    "axe-core": "^3.3.0",
+    "axe-core": "^3.3.2",
     "requestidlecallback": "^0.3.0"
   },
   "devDependencies": {
-    "cypress": "^3.0.3",
+    "cypress": "^3.4.1",
     "cypress-shadow-dom": "^1.0.0",
-    "eslint": "^6.0.0",
-    "eslint-config-airbnb": "^18.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1",
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
     "http-server": "^0.11.1",
-    "husky": "^3.0.0",
-    "lint-staged": "^9.0.0",
-    "prettier": "^1.15.3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "start-server-and-test": "^1.9.1"
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.4",
+    "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "start-server-and-test": "^1.10.0"
   },
   "repository": {
     "type": "git",
