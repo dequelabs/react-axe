@@ -1,4 +1,4 @@
-/* global document, window, Promise */
+/* global Promise */
 var axeCore = require('axe-core');
 var rIC = require('requestidlecallback');
 var after = require('./after');
@@ -123,7 +123,11 @@ function checkAndReport(node, timeout) {
   nodes.push(node);
   idleId = requestIdleCallback(
     function() {
-      var n = getCommonParent(nodes);
+      var n = getCommonParent(
+        nodes.filter(function(node) {
+          return node.isConnected;
+        })
+      );
       if (n.nodeName.toLowerCase() === 'html') {
         // if the only common parent is the body, then analyze the whole page
         n = document;
