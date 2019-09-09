@@ -39,6 +39,7 @@
   ],
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MPL-2.0",
+  "sideEffects": false,
   "dependencies": {
     "axe-core": "^3.3.2",
     "requestidlecallback": "^0.3.0"
