@@ -124,18 +124,18 @@ function checkAndReport(node, timeout) {
   nodes.push(node);
   idleId = requestIdleCallback(
     function() {
-			var n = context;
-			if (n === undefined) {
-				var n = getCommonParent(
-					nodes.filter(function (node) {
-						return node.isConnected;
-					})
-				);
-				if (n.nodeName.toLowerCase() === 'html') {
-					// if the only common parent is the body, then analyze the whole page
-					n = document;
-				}
-			}
+      var n = context;
+      if (n === undefined) {
+        n = getCommonParent(
+          nodes.filter(function(node) {
+            return node.isConnected;
+          })
+        );
+        if (n.nodeName.toLowerCase() === 'html') {
+          // if the only common parent is the body, then analyze the whole page
+          n = document;
+        }
+      }
       axeCore.run(n, { reporter: 'v2' }, function(error, results) {
         if (error) {
           return deferred.reject(error);
@@ -244,8 +244,8 @@ function addComponent(component) {
 var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf, _context) {
   React = _React;
   ReactDOM = _ReactDOM;
-	timeout = _timeout;
-	context = _context;
+  timeout = _timeout;
+  context = _context;
 
   if (conf) {
     axeCore.configure(conf);
