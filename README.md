@@ -59,6 +59,16 @@ var config = {
 axe(React, ReactDOM, 1000, config);
 ```
 
+Axe-core's context object can be given as a fifth optional argument to specify which element should (and which should not) be tested. Read more from the Axe-core documentation: https://github.com/dequelabs/axe-core/blob/master/doc/API.md#context-parameter
+
+```js
+var context = {
+  include: [['#preview']]
+};
+
+axe(React, ReactDOM, 1000, undefined, context);
+```
+
 ## Run the example
 
 Run a build in the example directory and start a server to see React-aXe in action in the Chrome Devtools console (opens on localhost:8888):
