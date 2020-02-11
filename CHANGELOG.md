@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/dequelabs/react-axe/compare/v3.3.0...v3.4.0) (2020-02-11)
+
+### Features
+
+- Support Axe-core context param ([#127](https://github.com/dequelabs/react-axe/issues/127)) ([c37fc18](https://github.com/dequelabs/react-axe/commit/c37fc1891049f34586555420ccf6dddf2b51008c))
+
 ## [3.3.0](https://github.com/dequelabs/react-axe/compare/v3.0.1...v3.3.0) (2019-08-28)
 
 ### Bug Fixes
