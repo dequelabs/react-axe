@@ -24,6 +24,27 @@ var components = {};
 var nodes = [document.documentElement];
 var cache = {};
 
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+// @see https://davidwalsh.name/javascript-debounce-function
+function debounce(func, wait, immediate) {
+  var _timeout;
+  return function() {
+    var context = this,
+      args = arguments;
+    var later = function() {
+      _timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !_timeout;
+    clearTimeout(_timeout);
+    _timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
+
 function getPath(node) {
   var path = [node];
   while (node && node.nodeName.toLowerCase() !== 'html') {
@@ -219,8 +240,9 @@ function checkNode(component) {
 }
 
 function componentAfterRender(component) {
-  after(component, 'componentDidMount', checkNode);
-  after(component, 'componentDidUpdate', checkNode);
+  var debounceCheckNode = debounce(checkNode, timeout);
+  after(component, 'componentDidMount', debounceCheckNode);
+  after(component, 'componentDidUpdate', debounceCheckNode);
 }
 
 function addComponent(component) {
