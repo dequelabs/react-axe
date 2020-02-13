@@ -32,16 +32,16 @@ var cache = {};
 function debounce(func, wait, immediate) {
   var _timeout;
   return function() {
-    var context = this,
+    var _context = this,
       args = arguments;
     var later = function() {
       _timeout = null;
-      if (!immediate) func.apply(context, args);
+      if (!immediate) func.apply(_context, args);
     };
     var callNow = immediate && !_timeout;
     clearTimeout(_timeout);
     _timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
+    if (callNow) func.apply(_context, args);
   };
 }
 
