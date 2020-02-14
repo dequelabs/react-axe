@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.4.1](https://github.com/dequelabs/react-axe/compare/v3.4.0...v3.4.1) (2020-02-14)
+
+### Bug Fixes
+
+- **debounce:** make 3rd parameter a true debounce ([0503d5f](https://github.com/dequelabs/react-axe/commit/0503d5f1e17a1db6ad8f205ee122c4598755738b))
+
 ## [3.4.0](https://github.com/dequelabs/react-axe/compare/v3.3.0...v3.4.0) (2020-02-11)
 
 ### Features
