@@ -18,11 +18,11 @@ Call the exported function passing in the React and ReactDOM objects as well as 
 
 ```js
 var React = require('react');
-var ReactDOM = require('react-dom');
+var { findDOMNode } = require('react-dom');
 
 if (process.env.NODE_ENV !== 'production') {
   var axe = require('react-axe');
-  axe(React, ReactDOM, 1000);
+  axe(React, findDOMNode, 1000);
 }
 ```
 

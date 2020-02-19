@@ -1,6 +1,6 @@
 import 'webcomponents.js/webcomponents.min.js';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { findDOMNode, render } from 'react-dom';
 
 var GlobalHeader = require('./globalHeader');
 var ServiceChooser = require('./serviceChooser');
@@ -18,7 +18,7 @@ var axeConf = {
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  axe(React, ReactDOM, 1000, axeConf);
+  axe(React, findDOMNode, 1000, axeConf);
 }
 
 var services = [
@@ -33,7 +33,7 @@ var services = [
 document.addEventListener('DOMContentLoaded', function() {
   const mountNode = document.querySelector('#container');
   mountNode &&
-    ReactDOM.render(
+    render(
       <div>
         <GlobalHeader />
         <ServiceChooser items={services} />

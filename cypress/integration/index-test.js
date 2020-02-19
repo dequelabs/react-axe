@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { findDOMNode } from 'react-dom';
 
 const axe = require('../../index');
 
@@ -27,7 +27,7 @@ describe('React-axe', function() {
       cy.spy(win.console, 'groupCollapsed');
       cy.spy(win.console, 'groupEnd');
 
-      axe(React, ReactDOM, 0).then(function() {
+      axe(React, findDOMNode, 0).then(function() {
         expect(win.console.group).to.be.calledWith(
           '%cNew aXe issues',
           'color:red;font-weight:normal;'
@@ -51,7 +51,7 @@ describe('React-axe', function() {
           serviceChooser = node[0];
         });
 
-      axe(React, ReactDOM, 0).then(function() {
+      axe(React, findDOMNode, 0).then(function() {
         expect(filterLogs(groupCollapsed.args, colorMessage)).to.equal(
           colorMessage
         );

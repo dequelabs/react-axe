@@ -7,7 +7,7 @@ var requestIdleCallback = rIC.request;
 var cancelIdleCallback = rIC.cancel;
 
 var React = undefined;
-var ReactDOM = undefined;
+var ReactDOMFindDOMNode = undefined;
 
 var boldCourier = 'font-weight:bold;font-family:Courier;';
 var critical = 'color:red;font-weight:bold;';
@@ -222,7 +222,7 @@ function checkNode(component) {
   var node = null;
 
   try {
-    node = ReactDOM.findDOMNode(component);
+    node = ReactDOMFindDOMNode(component);
   } catch (e) {
     console.group('%caXe error: could not check node', critical);
     console.group('%cComponent', serious);
@@ -263,9 +263,15 @@ function addComponent(component) {
   }
 }
 
-var reactAxe = function reactAxe(_React, _ReactDOM, _timeout, conf, _context) {
+var reactAxe = function reactAxe(
+  _React,
+  _ReactDOMFindDOMNode,
+  _timeout,
+  conf,
+  _context
+) {
   React = _React;
-  ReactDOM = _ReactDOM;
+  ReactDOMFindDOMNode = _ReactDOMFindDOMNode;
   timeout = _timeout;
   context = _context;
 
