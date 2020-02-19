@@ -8,7 +8,7 @@
     "prepare": "npm run install:example",
     "install:example": "cd example && npm install",
     "eslint": "eslint --ext .js,.ts *.ts",
-    "test": "eslint index.ts && start-server-and-test start-server http://localhost:8080 test:run",
+    "test": "eslint index.ts && tsc && start-server-and-test start-server http://localhost:8080 test:run",
     "start-server": "cd example && npm run start",
     "test:run": "cypress run",
     "test:debug": "cypress open",
