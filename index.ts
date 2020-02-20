@@ -203,7 +203,7 @@ function checkAndReport(node: Node, timeout: number): Promise<void> {
           });
 
           if (results.violations.length) {
-            console.group('%cNew aXe issues', serious);
+            console.group('%cNew axe issues', serious);
             results.violations.forEach(result => {
               let fmt: string;
               switch (result.impact) {
@@ -260,7 +260,7 @@ function checkNode(component: React.Component): void {
   try {
     node = ReactDOM.findDOMNode(component);
   } catch (e) {
-    console.group('%caXe error: could not check node', critical);
+    console.group('%caxe error: could not check node', critical);
     console.group('%cComponent', serious);
     console.error(component);
     console.groupEnd();
