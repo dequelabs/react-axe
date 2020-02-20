@@ -3,47 +3,8 @@ import axeCore = require('axe-core');
 import rIC = require('requestidlecallback');
 import after = require('./after');
 
-// @reference https://www.npmjs.com/package/@types/requestidlecallback
-// (it's declared as type=dom so had to copy/paste here)
-interface IdleDeadline {
-  timeRemaining(): DOMHighResTimeStamp;
-  readonly didTimeout: boolean;
-}
-interface IdleRequestOptions {
-  timeout: number;
-}
-
-type IdleCallbackHandle = number;
-type IdleRequestCallback = (deadline: IdleDeadline) => void;
-type requestIdleCallback = (
-  callback: IdleRequestCallback,
-  options?: IdleRequestOptions
-) => IdleCallbackHandle;
-type cancelIdleCallback = (handle: number) => void;
-
-// @reference axe-corehttps://github.com/dequelabs/axe-core/blob/develop/lib/core/base/audit.js
-type AxeCoreNodeResultKey = 'any' | 'all' | 'none';
-
-interface AxeWithAudit {
-  _audit: {
-    data: {
-      failureSummaries: {
-        any: {
-          failureMessage: (args: string[]) => string;
-        };
-        all: {
-          failureMessage: (args: string[]) => string;
-        };
-        none: {
-          failureMessage: (args: string[]) => string;
-        };
-      };
-    };
-  };
-}
-
-const requestIdleCallback: requestIdleCallback = rIC.request;
-const cancelIdleCallback: cancelIdleCallback = rIC.cancel;
+const requestIdleCallback = rIC.request;
+const cancelIdleCallback = rIC.cancel;
 
 let React;
 let ReactDOM;
