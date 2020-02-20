@@ -19,7 +19,7 @@ const defaultReset = 'font-color:black;font-weight:normal;';
 let idleId: number | undefined;
 let timeout: number;
 let context: axeCore.ElementContext;
-let _createElement: Function;
+let _createElement: typeof React.createElement;
 const components: { [id: number]: React.Component } = {};
 const nodes: Node[] = [document.documentElement];
 const cache: { [key: string]: string } = {};
