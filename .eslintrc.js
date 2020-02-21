@@ -1,10 +1,15 @@
 module.exports = {
-  "extends": "eslint:recommended",
-  "rules": {
-    "no-console": "off"
+  parser: '@typescript-eslint/parser',
+  extends: ['plugin:@typescript-eslint/recommended'],
+  rules: {
+    'no-console': 'off'
   },
-  "env": {
-    "browser": true,
-    "node": true
+  env: {
+    browser: true,
+    node: true
+  },
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 2018
   }
 };

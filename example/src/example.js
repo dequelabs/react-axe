@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 var GlobalHeader = require('./globalHeader');
 var ServiceChooser = require('./serviceChooser');
 
-var axe = require('../../index.js');
+var axe = require('../../dist/index.js');
 var axeConf = {
   rules: [
     { id: 'heading-order', enabled: true },
