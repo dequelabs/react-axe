@@ -23,7 +23,7 @@ const darkTheme = {
   text: 'white'
 };
 
-let theme =
+const theme =
   window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     ? darkTheme
     : lightTheme;
