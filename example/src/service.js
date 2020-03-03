@@ -1,18 +1,21 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 
-module.exports = createReactClass({
-  getInitialState: function() {
-    return { active: false };
-  },
-  clickHandler: function() {
+class Service extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: false
+    };
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+  clickHandler() {
     var active = !this.state.active;
 
     this.setState({ active: active });
     // Notify the ServiceChooser, by calling its addTotal method
     this.props.addTotal(active ? this.props.price : -this.props.price);
-  },
-  render: function() {
+  }
+  render() {
     return (
       <p
         className={this.state.active ? 'active' : ''}
@@ -22,4 +25,6 @@ module.exports = createReactClass({
       </p>
     );
   }
-});
+}
+
+export default Service;

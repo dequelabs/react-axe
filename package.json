@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepare": "npm run install:example",
+    "build": "tsc",
+    "prepare": "npm run build && npm run install:example",
     "install:example": "cd example && npm install",
     "eslint": "eslint --ext .js,.ts *.ts",
     "test": "eslint index.ts && tsc && start-server-and-test start-server http://localhost:8080 test:run",
