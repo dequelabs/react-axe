@@ -1,6 +1,7 @@
 import React from 'react';
+import ShadowDOM from 'react-shadow';
 
-import './services.css';
+import styles from './services.css';
 import Service from './service';
 
 class ServiceChooser extends React.Component {
@@ -30,14 +31,15 @@ class ServiceChooser extends React.Component {
     });
 
     return (
-      <div id="service-chooser">
+      <ShadowDOM.div id="service-chooser">
         <div id="services">
           {services}
           <p id="total">
             Total <b>${this.state.total.toFixed(2)}</b>
           </p>
         </div>
-      </div>
+        <style type="text/css">{styles}</style>
+      </ShadowDOM.div>
     );
   }
 }
