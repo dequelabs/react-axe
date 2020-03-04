@@ -9,12 +9,31 @@ const cancelIdleCallback = rIC.cancel;
 let React;
 let ReactDOM;
 
+// contrasted against Chrome default color of #ffffff
+const lightTheme = {
+  serious: '#d93251',
+  minor: '#d24700',
+  text: 'black'
+};
+
+// contrasted against Safari dark mode color of #535353
+const darkTheme = {
+  serious: '#ffb3b3',
+  minor: '#ffd500',
+  text: 'white'
+};
+
+const theme =
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? darkTheme
+    : lightTheme;
+
 const boldCourier = 'font-weight:bold;font-family:Courier;';
-const critical = 'color:red;font-weight:bold;';
-const serious = 'color:red;font-weight:normal;';
-const moderate = 'color:orange;font-weight:bold;';
-const minor = 'color:orange;font-weight:normal;';
-const defaultReset = 'font-color:black;font-weight:normal;';
+const critical = `color:${theme.serious};font-weight:bold;`;
+const serious = `color:${theme.serious};font-weight:normal;`;
+const moderate = `color:${theme.minor};font-weight:bold;`;
+const minor = `color:${theme.minor};font-weight:normal;`;
+const defaultReset = `font-color:${theme.text};font-weight:normal;`;
 
 let idleId: number | undefined;
 let timeout: number;
