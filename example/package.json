@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run build",
     "start": "http-server -u localhost -p 8080",
-    "build": "browserify src/example.js --outfile dist/bundle.js"
+    "build": "browserify src/example.js --outfile dist/bundle.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Dylan Barrell (dylan@barrell.com)",
   "license": "MIT",
@@ -18,7 +20,8 @@
     "react-dom": "^16.8.6",
     "react-shadow": "^17.0.0",
     "styled-components": "^5.0.0",
-    "webcomponents.js": "^0.7.24"
+    "webcomponents.js": "^0.7.24",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -41,5 +44,6 @@
         }
       ]
     ]
-  }
+  },
+  "snyk": true
 }
