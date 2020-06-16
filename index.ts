@@ -300,7 +300,7 @@ function checkNode(component: React.Component): void {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function componentAfterRender(component: any): void {
-  const debounceCheckNode: Function = debounce(checkNode, timeout);
+  const debounceCheckNode: Function = debounce(checkNode, timeout, true);
   after(component, 'componentDidMount', debounceCheckNode);
   after(component, 'componentDidUpdate', debounceCheckNode);
 }
