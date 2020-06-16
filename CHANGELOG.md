@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/dequelabs/react-axe/compare/v3.4.1...v3.5.0) (2020-06-16)
+
+### Features
+
+- convert to typescript ([#137](https://github.com/dequelabs/react-axe/issues/137)) ([261d358](https://github.com/dequelabs/react-axe/commit/261d3584a5fcfbf182a215fee3e824f996e0e669))
+
+### Bug Fixes
+
+- 4.5:1 ratio for devtool colors in both light and dark theme ([#142](https://github.com/dequelabs/react-axe/issues/142)) ([35a3f4d](https://github.com/dequelabs/react-axe/commit/35a3f4d523a44375ad30a45bc6adebc48280acb3))
+- fire checkNode on leading edge ([#147](https://github.com/dequelabs/react-axe/issues/147)) ([055dc2b](https://github.com/dequelabs/react-axe/commit/055dc2b13ffbb7e991ae7cc8a18b5ae4b11b3919))
+
 ### [3.4.1](https://github.com/dequelabs/react-axe/compare/v3.4.0...v3.4.1) (2020-02-14)
 
 ### Bug Fixes
