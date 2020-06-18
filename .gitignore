@@ -3,3 +3,4 @@ example/node_modules
 example/build
 example/dist
 example/package-lock.json
+dist
