@@ -1,6 +1,6 @@
 {
   "name": "react-axe",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,9 +14,10 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build && npm run install:example",
+    "prepare": "npm run build",
     "install:example": "cd example && npm install",
     "eslint": "eslint --ext .js,.ts *.ts",
+    "pretest": "npm run install:example",
     "test": "eslint index.ts && tsc && start-server-and-test start-server http://localhost:8080 test:run",
     "start-server": "cd example && npm run start",
     "test:run": "cypress run",
