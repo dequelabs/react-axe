@@ -1,9 +1,17 @@
 {
   "name": "react-axe",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/after.js",
+    "dist/after.d.ts",
+    "dist/after.js.map",
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.js.map"
+  ],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build && npm run install:example",
