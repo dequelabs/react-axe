@@ -58,6 +58,19 @@ jobs:
             chmod +x ./node-github-release.sh
             ./node-github-release.sh
 
+# Release a canary build.
+canary_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v4-cache-{{ checksum "package-lock.json" }}
+      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+      - run: npm whoami
+      - run: .circleci/canary-version.js
+      - run: npm publish --tag=next
+
 workflows:
   version: 2
   build:
@@ -75,6 +88,14 @@ workflows:
           filters:
             branches:
               only: master
+      # Run a canary release on "develop" commits, but only after the tests pass and dependencies are installed.
+      - canary_release:
+          requires:
+            - dependencies
+            - tests
+          filters:
+            branches:
+              only: develop
       - github_release:
           requires:
             - release
