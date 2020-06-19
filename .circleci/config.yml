@@ -14,12 +14,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v4-cache-{{ checksum "package-lock.json" }}
+            - v5-cache-{{ checksum "package-lock.json" }}
       # Install package dependencies.
       - run: npm install
       - run: npm run install:example
       - save_cache:
-          key: v4-cache-{{ checksum "package-lock.json" }}
+          key: v5-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
             - example/node_modules
@@ -32,7 +32,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v4-cache-{{ checksum "package-lock.json" }}
+            - v5-cache-{{ checksum "package-lock.json" }}
       - run: npm run test
 
   # Release a new version.
@@ -43,7 +43,7 @@ jobs:
       - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
       - restore_cache:
           keys:
-            - v4-cache-{{ checksum "package-lock.json" }}
+            - v5-cache-{{ checksum "package-lock.json" }}
       - run: npm publish
   github_release:
     docker:
@@ -65,7 +65,7 @@ jobs:
         - checkout
         - restore_cache:
             keys:
-              - v4-cache-{{ checksum "package-lock.json" }}
+              - v5-cache-{{ checksum "package-lock.json" }}
         - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
         - run: npm whoami
         - run: .circleci/canary-version.js
