@@ -4,7 +4,7 @@
   "description": "Dynamic accessibility analysis for React using axe-core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-	"files": [
+  "files": [
     "/dist"
   ],
   "scripts": {
