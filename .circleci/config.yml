@@ -44,7 +44,9 @@ jobs:
       - restore_cache:
           keys:
             - v4-cache-{{ checksum "package-lock.json" }}
+      - run: npx tsc
       - run: npm publish
+
   github_release:
     docker:
       - image: circleci/golang:1.10
@@ -69,6 +71,8 @@ jobs:
         - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
         - run: npm whoami
         - run: .circleci/canary-version.js
+        # For an unknown reason, `npm run build` is failing with "cannot run in wd ", which prevents the `dist/` files from being emitted. This ensures the files are there before trying to publish.
+        - run: npx tsc
         - run: npm publish --tag=next
 
 workflows:
