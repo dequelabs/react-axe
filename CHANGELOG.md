@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.1](https://github.com/dequelabs/react-axe/compare/v3.5.0...v3.5.1) (2020-06-19)
+
+### Bug Fixes
+
+- explicitly include dist files in npm tarball ([#158](https://github.com/dequelabs/react-axe/issues/158)) ([6bd3ddf](https://github.com/dequelabs/react-axe/commit/6bd3ddfcfd1fb621d95096b10becc7bf72123f02))
+- **build:** don't ignore dist direcotry ([#155](https://github.com/dequelabs/react-axe/issues/155)) ([3771b26](https://github.com/dequelabs/react-axe/commit/3771b262df4e8919f5370d1d45ae1ebdd608ca73))
+- **build:** don't ignore dist direcotry ([#155](https://github.com/dequelabs/react-axe/issues/155)) ([647ac6f](https://github.com/dequelabs/react-axe/commit/647ac6f8a278d7c83b27b6556bd34b0e84018934))
+
 ## [3.5.0](https://github.com/dequelabs/react-axe/compare/v3.4.1...v3.5.0) (2020-06-16)
 
 ### Features
