@@ -6,3 +6,4 @@ node_modules
 .eslintrc.js
 cypress.json
 tsconfig.json
+!dist
