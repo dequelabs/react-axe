@@ -70,6 +70,12 @@ jobs:
         - run: npm whoami
         - run: .circleci/canary-version.js
         - run: npm publish --tag=next
+        - run:
+            name: Inspect dist dir
+            command: |
+              ls -lsa
+              ls -lsa dist
+              npm pack
 
 workflows:
   version: 2
@@ -95,7 +101,10 @@ workflows:
             - test
           filters:
             branches:
-              only: develop
+              only:
+                - develop
+                # TODO: remove when done testing
+                - add-debugging-stuff-who-knows
       - github_release:
           requires:
             - release
