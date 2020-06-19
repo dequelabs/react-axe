@@ -58,18 +58,18 @@ jobs:
             chmod +x ./node-github-release.sh
             ./node-github-release.sh
 
-# Release a canary build.
-canary_release:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v4-cache-{{ checksum "package-lock.json" }}
-      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
-      - run: npm whoami
-      - run: .circleci/canary-version.js
-      - run: npm publish --tag=next
+  # Release a canary build.
+  canary_release:
+      <<: *defaults
+      steps:
+        - checkout
+        - restore_cache:
+            keys:
+              - v4-cache-{{ checksum "package-lock.json" }}
+        - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+        - run: npm whoami
+        - run: .circleci/canary-version.js
+        - run: npm publish --tag=next
 
 workflows:
   version: 2
