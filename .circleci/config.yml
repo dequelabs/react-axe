@@ -92,7 +92,7 @@ workflows:
       - canary_release:
           requires:
             - dependencies
-            - tests
+            - test
           filters:
             branches:
               only: develop
