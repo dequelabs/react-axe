@@ -10,5 +10,6 @@
     "lib": ["dom", "es5"],
     "resolveJsonModule": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["test", "dist", "node_modules"]
 }

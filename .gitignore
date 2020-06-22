@@ -4,3 +4,5 @@ example/build
 example/dist
 example/package-lock.json
 dist
+test
+cypress/screenshots

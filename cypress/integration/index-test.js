@@ -21,7 +21,7 @@ describe('React-axe', function() {
     cy.get('h1').should('contain', 'Our services');
   });
 
-  it('should run axe in the context of the document', function() {
+  it('should run axe in the context of the document', function(done) {
     cy.visit('http://localhost:8080').then(function(win) {
       cy.spy(win.console, 'group');
       cy.spy(win.console, 'groupCollapsed');
@@ -29,16 +29,17 @@ describe('React-axe', function() {
 
       axe(React, ReactDOM, 0).then(function() {
         expect(win.console.group).to.be.calledWith(
-          '%cNew aXe issues',
-          'color:red;font-weight:normal;'
+          '%cNew axe issues',
+          'color:#d93251;font-weight:normal;'
         );
         expect(win.console.groupCollapsed).to.be.calledWith('%c%s: %c%s %s');
         expect(win.console.groupEnd).to.be.called;
+        done();
       });
     });
   });
 
-  it('should run axe inside of Shadow DOM', function() {
+  it('should run axe inside of Shadow DOM', function(done) {
     cy.visit('http://localhost:8080').then(function(win) {
       const groupCollapsed = cy.spy(win.console, 'groupCollapsed');
       const colorMessage = 'Elements must have sufficient color contrast';
@@ -58,6 +59,7 @@ describe('React-axe', function() {
         expect(filterLogs(groupCollapsed.args, serviceChooser)).to.equal(
           serviceChooser
         );
+        done();
       });
     });
   });
