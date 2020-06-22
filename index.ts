@@ -37,7 +37,7 @@ const defaultReset = `font-color:${theme.text};font-weight:normal;`;
 
 let idleId: number | undefined;
 let timeout: number;
-let context: axeCore.ElementContext;
+let context: axeCore.ElementContext | undefined;
 let _createElement: typeof React.createElement;
 const components: { [id: number]: React.Component } = {};
 const nodes: Node[] = [document.documentElement];
@@ -340,8 +340,8 @@ function reactAxe(
   _React: typeof React,
   _ReactDOM: typeof ReactDOM,
   _timeout: number,
-  conf: axeCore.Spec,
-  _context: axeCore.ElementContext
+  conf?: axeCore.Spec,
+  _context?: axeCore.ElementContext
 ): Promise<void> {
   React = _React;
   ReactDOM = _ReactDOM;
