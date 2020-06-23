@@ -9,8 +9,6 @@ const name = pkg.originalName || pkg.name;
 const dir =
   pkg.name === 'post-verify-release' ? `./node_modules/${name}` : './';
 
-console.log('dir:', dir);
-
 // confirm main file exists
 if (!fs.existsSync(path.join(dir, pkg.main))) {
   throw new Error('"package.main" file does not exist');
