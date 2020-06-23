@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.3](https://github.com/dequelabs/react-axe/compare/v3.5.2...v3.5.3) (2020-06-23)
+
+### Bug Fixes
+
+- make conf and context parameters optional again ([#171](https://github.com/dequelabs/react-axe/issues/171)) ([605cab8](https://github.com/dequelabs/react-axe/commit/605cab8d922c2a65bf6c823209073dcb407ad761))
+
 ### [3.5.2](https://github.com/dequelabs/react-axe/compare/v3.5.1...v3.5.2) (2020-06-19)
 
 ### [3.5.1](https://github.com/dequelabs/react-axe/compare/v3.5.0...v3.5.1) (2020-06-19)
