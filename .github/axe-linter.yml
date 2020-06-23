@@ -1,0 +1,4 @@
+exclude:
+  - ./CHANGELOG.md
+  - ./example/**/*
+  - ./cypress/**/*
