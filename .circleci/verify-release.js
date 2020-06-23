@@ -2,26 +2,31 @@
 
 const fs = require('fs');
 const pkg = require('../package.json');
-const { execSync } = require('child_process');
 const path = require('path');
-const name = pkg.name;
-const dir = `./node_modules/${name}`;
 
-// install version by changing the name of the current package
-pkg.name = 'verify-release';
-fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
-execSync(`npm install --no-save ${name}@${pkg.version}`);
+// use the installed version for post-verify or the current version for pre-verify
+const name = pkg.originalName || pkg.name;
+const dir =
+  pkg.name === 'post-verify-release' ? `./node_modules/${name}` : './';
+
+console.log('dir:', dir);
 
 // confirm main file exists
-fs.readFileSync(path.join(dir, pkg.main), 'utf-8');
+if (!fs.existsSync(path.join(dir, pkg.main))) {
+  throw new Error('"package.main" file does not exist');
+}
 
 // confirm declared files exist
 if (pkg.files) {
-  pkg.files.forEach(file => fs.readFileSync(path.join(dir, file), 'utf-8'));
+  pkg.files.forEach(file => {
+    if (!fs.existsSync(path.join(dir, file))) {
+      throw new Error(`"package.files['${file}']" file does not exist`);
+    }
+  });
 }
 
 // confirm types file exists
 const types = pkg.types || pkg.typings;
-if (types) {
-  fs.readFileSync(path.join(dir, types), 'utf-8');
+if (types && !fs.existsSync(path.join(dir, types))) {
+  throw new Error('"package.types" or "package.typings" file does not exist');
 }
