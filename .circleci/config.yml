@@ -62,18 +62,39 @@ jobs:
 
   # Release a canary build.
   canary_release:
-      <<: *defaults
-      steps:
-        - checkout
-        - restore_cache:
-            keys:
-              - v4-cache-{{ checksum "package-lock.json" }}
-        - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
-        - run: npm whoami
-        - run: .circleci/canary-version.js
-        # For an unknown reason, `npm run build` is failing with "cannot run in wd ", which prevents the `dist/` files from being emitted. This ensures the files are there before trying to publish.
-        - run: npx tsc
-        - run: npm publish --tag=next
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v4-cache-{{ checksum "package-lock.json" }}
+      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+      - run: npm whoami
+      - run: .circleci/canary-version.js
+      # For an unknown reason, `npm run build` is failing with "cannot run in wd ", which prevents the `dist/` files from being emitted. This ensures the files are there before trying to publish.
+      - run: npx tsc
+      - run: npm publish --tag=next
+
+  # Verify release has all required files
+  verify_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v4-cache-{{ checksum "package-lock.json" }}
+      - run: .circleci/verify-release.js
+
+  # Verify canary release has all required files
+  verify_canary_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v4-cache-{{ checksum "package-lock.json" }}
+      - run: .circleci/canary-version.js
+      - run: .circleci/verify-release.js
 
 workflows:
   version: 2
@@ -97,6 +118,19 @@ workflows:
           requires:
             - dependencies
             - test
+          filters:
+            branches:
+              only: develop
+      # Verify releases have all required files`
+      - verify_release:
+          requires:
+            - release
+          filters:
+            branches:
+              only: master
+      - verify_canary_release:
+          requires:
+            - canary_release
           filters:
             branches:
               only: develop
