@@ -22,8 +22,6 @@ reactAxe(React, ReactDOM, 1000, {
 });
 
 const context = document.createElement('div');
-context.setAttribute('id', 'container');
-document.body.appendChild(context);
 
 // axe-core context: Node
 reactAxe(React, ReactDOM, 1000, {}, context);
