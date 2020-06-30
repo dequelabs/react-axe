@@ -123,7 +123,7 @@ workflows:
           filters:
             branches:
               only: develop
-      # Verify releases have all required files`
+      # Verify releases have all required files
       - verify_release:
           requires:
             - release
