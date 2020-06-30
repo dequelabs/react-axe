@@ -45,7 +45,7 @@ jobs:
           keys:
             - v4-cache-{{ checksum "package-lock.json" }}
       - run: npx tsc
-      - run: .circleci/verify-release.js
+      - run: .circleci/verify-release.sh
       - run: npm publish
 
   github_release:
@@ -74,7 +74,7 @@ jobs:
       - run: .circleci/canary-version.js
       # For an unknown reason, `npm run build` is failing with "cannot run in wd ", which prevents the `dist/` files from being emitted. This ensures the files are there before trying to publish.
       - run: npx tsc
-      - run: .circleci/verify-release.js
+      - run: .circleci/verify-release.sh
       - run: npm publish --tag=next
 
   # Verify released package has all required files
@@ -85,8 +85,7 @@ jobs:
       - restore_cache:
           keys:
             - v4-cache-{{ checksum "package-lock.json" }}
-      - run: .circleci/install-released-version.js
-      - run: .circleci/verify-release.js
+      - run: .circleci/verify-release.sh post
 
   # Verify canary released package has all required files
   verify_canary_release:
@@ -97,8 +96,7 @@ jobs:
           keys:
             - v4-cache-{{ checksum "package-lock.json" }}
       - run: .circleci/canary-version.js
-      - run: .circleci/install-released-version.js
-      - run: .circleci/verify-release.js
+      - run: .circleci/verify-release.sh post
 
 workflows:
   version: 2
