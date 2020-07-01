@@ -22,10 +22,6 @@ else
   node -pe "window={}; document={}; require('./$main')"
 fi
 
-if [ $? != 0 ]
-then
-  exit 1;
-fi
 
 # Test if typescript file exists (if declared)
 types=$(node -pe "require('./package.json').types")
