@@ -12,7 +12,7 @@ then
   mkdir "verify-release-$version"
   cd "verify-release-$version"
   npm init -y
-  npm install "$name@$name"
+  npm install "$name@$version"
   node -pe "window={}; document={}; require('$name')"
 
   cd "node_modules/${name}"
