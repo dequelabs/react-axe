@@ -9,10 +9,10 @@ then
   version=$(node -pe "require('./package.json').version")
   name=$(node -pe "require('./package.json').name")
 
-  # mkdir "verify-release-$version"
+  mkdir "verify-release-$version"
   cd "verify-release-$version"
-  # npm init -y
-  # npm install "$name@3.4.0"
+  npm init -y
+  npm install "$name@3.4.0"
   node -pe "window={}; document={}; require('$name')"
 
   cd "node_modules/${name}"
