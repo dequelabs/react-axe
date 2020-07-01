@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 if [ ! -z "$1" ] && [ $1 = 'post' ]
 then
   # verify the released npm package in another dir as we can't
