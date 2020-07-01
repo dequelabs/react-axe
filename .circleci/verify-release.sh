@@ -9,10 +9,10 @@ then
   version=$(node -pe "require('./package.json').version")
   name=$(node -pe "require('./package.json').name")
 
-  mkdir "verify-release-$version"
+  # mkdir "verify-release-$version"
   cd "verify-release-$version"
-  npm init -y
-  npm install "$name@$version"
+  # npm init -y
+  # npm install "$name@3.4.0"
   node -pe "window={}; document={}; require('$name')"
 
   cd "node_modules/${name}"
@@ -22,15 +22,18 @@ else
   node -pe "window={}; document={}; require('./$main')"
 fi
 
-
 # Test if typescript file exists (if declared)
+#
+# Note: because we are using node to read the package.json, the
+# variable gets set to the string `undefined` if the property
+# does not exists, rather than an empty variable.
 types=$(node -pe "require('./package.json').types")
-if [ $types = undefined ]
+if [ "$types" == "undefined" ]
 then
   types=$(node -pe "require('./package.json').typings")
 fi
 
-if [ $types != undefined ] && [ ! -f "$types" ]
+if [ "$types" != "undefined" ] && [ ! -f "$types" ]
 then
   echo "types file missing"
   exit 1;
