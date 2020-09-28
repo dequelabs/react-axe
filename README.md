@@ -1,3 +1,11 @@
+# [DEPRECATED] react-axe
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+> This repository has been deprecated. The package has been moved to [axe-core-npm](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/react). The package will be available via NPM as [`@axe-core/react`](https://www.npmjs.com/package/@axe-core/react).
+
+---
+
 # React-axe
 
 Test your React application with the [axe-core](https://github.com/dequelabs/axe-core) accessibility testing library. Results will show in the Chrome DevTools console.
