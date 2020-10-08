@@ -28,7 +28,7 @@
     "browserify": "^16.1.1",
     "browserify-css": "^0.15.0",
     "envify": "^4.1.0",
-    "http-server": "^0.11.1"
+    "http-server": "^0.12.3"
   },
   "browserify": {
     "transform": [
